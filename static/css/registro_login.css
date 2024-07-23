@@ -1,0 +1,89 @@
+.column {
+    float: left;
+    width: 45%; /* Reduzi a largura para deixar mais próximas */
+    box-sizing: border-box;
+    box-shadow:  2.5px 2.5px 5px rgba(0, 0, 0, 0.5);
+    padding: 10px; /* Adicionei algum espaço interno */
+    border-radius: 10px; /* Adicionei bordas arredondadas */
+    margin: 5px; /* Adicionei uma pequena margem entre as colunas */
+    background-color: #fff; /* Adicionei uma cor de fundo */
+    border: 0.5px solid #cccccc; /* Adicionei uma borda */  
+}
+@media (max-width: 768px) {
+    .column {
+        width: 100%;
+        margin-top: 30px;
+        margin-left: -10px;
+    }
+    
+    
+}
+
+h2{
+    margin-bottom: 0;
+    font-weight: 200;
+    text-align: center;
+    padding: 30px;
+}
+
+.container {
+    padding-left: 10%;
+}
+
+.container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Adicionei algum espaçamento vertical para os elementos dentro das colunas */
+.column p {
+    margin: 10px 0;
+}
+
+/* Ajustei o estilo do botão */
+button {
+    background-color: #F78536;
+    color: #000000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #3d3b3b;
+    color: #fff;
+    transition: 0.3s;
+
+}
+
+
+@media screen and (max-width: 768px) {
+    header {
+        height: auto;
+        width: auto;
+    }
+    header #fh5co-logo {
+        left: 25% !important;
+    }
+    
+}
+header {
+    max-width: 100%;
+}
+
+header #fh5co-logo {
+    left: -7.5%;
+}
+
+
+.e-mail {
+    padding: 5px;
+    background-color: #ffebdc;
+    border: 0;
+    border-radius: 5px;
+    width: 100%;
+    margin-right: 5px;
+}

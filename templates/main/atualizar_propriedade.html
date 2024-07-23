@@ -1,0 +1,287 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/propriedade.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reserva.css' %}">
+    <style>
+        .btn.btn-primary, .btn.btn-success {
+            margin-bottom: 15%;
+            
+        }
+        .botoes {
+            padding: 10px;
+        }
+        .e-mail {
+            width: 50%;
+        }
+        h1, p {
+            color: black;
+        }
+        @media screen and (max-width: 768px) {
+            .btn.btn-primary {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            .btn.btn-success {
+                margin-bottom: 160px;
+            }
+        }
+    </style>
+</head>
+<h1><br>Atualize o cadastro da sua propriedade! <br> <p>Antes de finalizar, confira os dados!</p></h1>
+
+<form method="post" enctype="multipart/form-data" class="form">
+    {% csrf_token %}
+
+<div class="botoes">
+    <!-- Botão para abrir o primeiro modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">
+        Dados da propriedade
+    </button>
+
+    <!-- Botão para abrir o terceiro modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal2">
+        Informações gerais
+    </button>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal3">
+        Permissões
+    </button>
+    <button type="submit" class="btn btn-success">Salvar</button>
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        <strong>Por favor, corrija os seguintes erros:</strong>
+        <ul>
+            {% for field, errors in form.errors.items %}
+                {{ field|title }}: {{ errors.0 }} <br>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+
+{% if fotos_form.errors %}
+    <div class="alert alert-danger">
+        <strong>Por favor, corrija os seguintes erros no formulário de fotos:</strong>
+        <ul>
+            {% for field, errors in fotos_form.errors.items %}
+                {{ field|title }}: {{ errors.0 }} <br>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+</div>
+
+
+<!-- Modal 1 -->
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Dados da propriedade</h5>
+                <button style="font-size: 30px; position: relative; top: -20px;" type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span  aria-hidden="true"><i class="fas fa-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="column">
+                    <label for="id_nome_da_propriedade">Nome da Propriedade<span style="color: red;">*</span></label>
+                  {{ form.nome_da_propriedade }}<br>
+
+                  <label for="id_codigo_postal">CEP<span style="color: red;">*</span></label><button type="button" id="consulta-cep">Consultar CEP</button>
+                    {{ form.codigo_postal }}<br>
+                    
+
+                    <label for="id_nome_da_rua">Nome da Rua<span style="color: red;">*</span></label>
+                    {{ form.nome_da_rua }}<br>
+                
+                    <label for="id_numero_residencia">Número da Residência<span style="color: red;">*</span></label>
+                    {{ form.numero_residencia }}<br>
+
+                    <label for="id_cidade">Cidade<span style="color: red;">*</span></label>
+                    {{ form.cidade }}<br>
+
+                    <label for="id_estado">Estado<span style="color: red;">*</span></label>
+                    {{ form.estado }}<br>
+
+                    <label for="id_pais_regiao">País/Região<span style="color: red;">*</span></label>
+                    {{ form.pais_regiao }}<br>
+                    
+                    <label for="id_telefone">Telefone<span style="color: red;">*</span></label>
+                    {{ form.telefone }}<br>
+
+                    <label for="id_email">E-mail<span style="color: red;">*</span></label>
+                    {{ form.email }}<br>
+
+                    <label>Fotos</label>
+                    <p>adicione no mínimo 5 fotos</p>
+                    {{ fotos_form.foto1 }} <br>
+                    {{ fotos_form.foto2 }} <br>
+                    {{ fotos_form.foto3 }} <br>
+                    {{ fotos_form.foto4 }} <br>
+                    {{ fotos_form.foto5 }} <br>
+                    {{ fotos_form.foto6 }} <br>
+                    {{ fotos_form.foto7 }} <br>
+                    {{ fotos_form.foto8 }} <br>
+                    {{ fotos_form.foto9 }} <br>
+                    {{ fotos_form.foto10 }} <br>
+                    <br>    
+                
+                    
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Confirmar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 2 -->
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Informações gerais</h5>
+                <button style="font-size: 30px; position: relative; top: -20px;" type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span  aria-hidden="true"><i class="fas fa-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Conteúdo do modal para a Coluna 3 -->
+                <!-- ... -->
+                <div class="column">
+                    <label for="id_qtd_banheiros">Quantidade de Banheiros<span style="color: red;">*</span></label>
+                    {{ form.qtd_banheiros }}<br>
+                
+                    <label for="id_idiomas">Idiomas<span style="color: red;">*</span></label>
+                    {{ form.idiomas }}<br>
+                    <label for="id_oferece_bercos">Oferece Berços<span style="color: red;">*</span></label>
+                    {{ form.oferece_bercos }}<br>
+                
+                    <label for="id_tamanho_da_propriedade">Tamanho da Propriedade<span style="color: red;">*</span></label>
+                    {{ form.tamanho_da_propriedade }}<br>
+                
+                    <label for="id_tamanho_unidade">Tamanho da Unidade<span style="color: red;">*</span></label>
+                    {{ form.tamanho_unidade }}<br>
+
+                    <label for="id_local_de_dormir">Local de Dormir<span style="color: red;">*</span></label>
+                    {{ form.local_de_dormir }}<br>
+
+                    <label for="id_serve_cafe_da_manha">Serve Café da Manhã<span style="color: red;">*</span></label>
+                    {{ form.serve_cafe_da_manha }}<br>
+                
+                    <label for="id_qtd_hospedes">Quantidade de Hóspedes<span style="color: red;">*</span></label>
+                    {{ form.qtd_hospedes }}<br>
+
+                    <label for="id_tem_estacionamento">Tem Estacionamento<span style="color: red;">*</span></label>
+                    {{ form.tem_estacionamento }}<br>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 3 -->
+<div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Permissões</h5>
+                <button style="font-size: 30px; position: relative; top: -20px;" type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span  aria-hidden="true"><i class="fas fa-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Conteúdo do modal para a Coluna 3 -->
+                <!-- ... -->
+                <div class="column">
+
+                    <label for="id_o_que_pode_usar_na_propriedade">O que Pode ser Usado na Propriedade<span style="color: red;">*</span></label>
+                    {{ form.o_que_pode_usar_na_propriedade }}<br>
+
+                    <label for="id_crianca_permissao">Permissão para Crianças<span style="color: red;">*</span></label>
+                    {{ form.crianca_permissao }}<br>
+
+                    <label for="id_permitido_fumar">Permitido Fumar<span style="color: red;">*</span></label>
+                    {{ form.permitido_fumar }}<br>
+
+                    <label for="id_bebidas_alcoolicas">Permitido bebidas alcoólicas<span style="color: red;">*</span></label>
+                    {{ form.bebidas_alcoolicas }}<br>
+                
+                    <label for="id_aceita_pets">Aceita Pets<span style="color: red;">*</span></label>
+                    {{ form.aceita_pets }}<br>
+                
+                    <label for="id_festas_eventos_permitidos">Festas/Eventos Permitidos<span style="color: red;">*</span></label>
+                    {{ form.festas_eventos_permitidos }}<br>
+                
+                    <label for="id_tipo_de_cobranca">Tipo de Cobrança<span style="color: red;">*</span></label>
+                    {{ form.tipo_de_cobranca }}<br>
+                
+                    <label for="id_valor_da_diaria">Valor da Diária<span style="color: red;">*</span></label>
+                    {{ form.valor_da_diaria }}<br>
+                
+                    
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script> $(document).ready(function(){ $('#consulta-cep').click(function(){ var cep = $('#id_codigo_postal').val().replace(/[^0-9]/g, ''); if (cep.length == 8) { $.ajax({ url: 'https://viacep.com.br/ws/' + cep + '/json/', dataType: 'json', success: function(data) { $('#id_nome_da_rua').val(data.logradouro); $('#id_complemento').val(data.complemento); $('#id_bairro').val(data.bairro); $('#id_cidade').val(data.localidade); $('#id_estado').val(data.uf); } }); } else { alert('CEP inválido'); } }); }); $(document).ready(function(){ $('#id_nome_da_rua, #id_complemento, #id_cidade, #id_estado').on('input', function() { this.value[0] = this.value.toUpperCase(); }); $('#id_pais_regiao').on('change', function() { this.value = this.value.toUpperCase(); }); }); </script>
+<script>
+    function handleCEP(event) {
+        let input = event.target;
+        let value = input.value.replace(/\D/g, ''); // Remove todos os não-dígitos
+        let formattedValue = '';
+
+        if (value.length >= 5) {
+            formattedValue = `${value.slice(0, 5)}-${value.slice(5)}`;
+        } else {
+            formattedValue = value;
+        }
+
+        input.value = formattedValue;
+    }
+</script>
+<script>
+    function handlePhone(event) {
+      let input = event.target;
+      let value = input.value.replace(/\D/g, ''); // Remove todos os não-dígitos
+      let formattedValue = '';
+    
+      if (value.length >= 11) {
+        formattedValue = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7, 11)}`;
+      } else if (value.length >= 7) {
+        formattedValue = `(${value.slice(0, 2)}) ${value.slice(2, 6)}-${value.slice(6)}`;
+      } else if (value.length >= 2) {
+        formattedValue = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+      } else {
+        formattedValue = value;
+      }
+    
+      input.value = formattedValue;
+    }
+</script>
+<script>
+    document.getElementById("confirm").addEventListener("submit", function(event) {
+        // Exibe o container de confirmação
+        document.getElementById("confirmacao").style.display = "block";
+    });
+</script>
+{% endblock %}

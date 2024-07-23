@@ -1,0 +1,551 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    <style>
+        /* Adicionando estilos para centralizar os botões e os títulos */
+        .button-container {
+            text-align: center;
+            margin: 20px 0;
+            justify-content: center;
+            display: block;
+            background-color: white;
+            max-width: 800px;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            padding: 20px;
+            border-radius: 10px;
+                    
+        }
+
+        h3{
+            text-align: center;
+            margin-top: 20px;
+            
+        }
+
+        .button-container button {
+            margin: 5px;
+        }
+
+        .btn-sm{
+            font-size: 16px;
+        }
+
+        .global-styles {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .table-container {
+            max-width: 800px;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .modern-table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        @media screen and (max-width: 768px) {
+            .table-container  {
+                overflow-x: scroll;
+            }
+        }
+
+        .modern-table thead th,
+        .modern-table tbody td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            width: calc(70% + 15px);
+
+        }
+        @media screen and (max-width: 768px) {
+            td button, td a {
+                font-size: 8px;
+                height: 100%;
+                text-align: center;
+                left: 0;
+                right: 0;
+            }
+            td .btn {
+                padding: 7px;
+            }
+            .table-container {
+                max-width: fit-content;
+                margin: 0 auto;
+            }
+            .modern-table thead th,
+            .modern-table tbody td {
+                padding: 5px 1px;
+                text-align: center;
+                border-bottom: 1px solid #ddd;
+                width: calc(80% + 15px);
+                font-size: 12.5px;
+            }
+
+            .modal-header{
+                padding: 10px;
+            }
+
+            .modal-body{
+                padding: 10px;
+            }
+            .modal-footer{
+                display: grid;
+                grid-template-columns: auto;
+                gap: 5px; /* Espaço entre os botões */
+                padding: 0px;
+                
+                
+            }
+            .btn-sm{
+                font-size: 14px;
+                width: auto;
+            }
+
+            .detalhes{
+                width: 90%;
+                height: 150px;
+            }
+            #confirmarExclusaoReservaModal{
+                height: 200px;
+            }
+            .card {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            height: 175px;
+            transform: translate(-50%, -50%);
+            background-color: #f1f1f1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            }
+
+        }
+
+        }
+        .modern-table thead th {
+            background-color: #f8f8f8;
+        }
+
+        .modern-table tbody tr:nth-child(even) {
+            background-color: #fff;
+        }
+        .modern-table tbody td {
+            background-color: #f8f8f8;
+        }
+
+                /* Reset some default styles for the table */
+        .global-styles, table {
+            margin: 0;
+            padding: 0;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .table-container {
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }       
+        /* Centralizando os títulos */
+        h2 {
+            text-align: center;
+        }
+        button {
+            color: black;
+            border-radius: 5px;
+            border: 0;
+            padding: 5px;
+            font-weight: 400;
+        }
+        button:hover {
+            transition: 0.3s;
+        }
+        .tabela-modal {
+            max-height: 100%; /* Defina a altura máxima da tabela, pode ser 100% para ocupar todo o modal */
+            overflow-y: auto; /* Adicione uma barra de rolagem vertical, se necessário */
+        }
+        .modal-lg {
+            max-height: 80vh; /* Defina a altura máxima do modal (80% da altura da viewport) */
+            overflow-y: auto; /* Torna o modal rolável se o conteúdo exceder a altura máxima */
+        }
+
+        .modal-content{
+            max-width: 100%;
+        }
+        #calendario .fc-event{
+            width: 100%; /* ou defina uma largura específica */
+        }
+        .space {
+            height: 50px;
+        }
+        .space-h1 {
+            height: 20px;
+        }
+
+        .card {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f1f1f1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+      
+   
+
+    </style> 
+</head>
+<body class="global-styles">
+    <div class="space-h1"></div>
+    {% if messages %}
+    <div id="alert-container" class="alert alert-success">
+        {% for message in messages %}
+            <strong>{{ message }}</strong>
+        {% endfor %}
+    </div>
+
+    <script>
+        // Aguarde 3 segundos e, em seguida, remova o alerta
+        setTimeout(function() {
+            var alertContainer = document.getElementById('alert-container');
+            if (alertContainer) {
+                alertContainer.classList.add('fade-out');
+                setTimeout(function() {
+                    alertContainer.remove();
+                }, 1000);  // Tempo da transição de fade-out (em milissegundos)
+            }
+        }, 3000);  // 3000 milissegundos = 3 segundos
+    </script>
+{% endif %}
+    <h2>Anfitrião</h2>
+    <!-- Adicionando uma div para centralizar os botões -->
+    <div  class="button-container">
+        <h3>Cadastre:</h3>
+        <a href="{% url 'salvar_hotel' %}"><button class="btn btn-primary"><i class="fas fa-hotel"></i> Hotel</button></a>
+        <a href="{% url 'salvar_pousada' %}"><button class="btn btn-primary"><i class="fas fa-house-chimney-user"></i> Pousada</button></a>
+        <a href="{% url 'salvar_casa' %}"><button class="btn btn-primary"><i class="fas fa-home"></i> Casa</button></a>
+        <a href="{% url 'salvar_apartamento' %}"><button class="btn btn-primary"><i class="fas fa-building"></i> Apartamento</button></a>
+        <a href="{% url 'salvar_casa_quarto' %}"><button class="btn btn-primary"><i class="fas fa-bed"></i> Quarto</button></a>
+    </div>
+
+    <h2>Suas Propriedades</h2>
+    {% if not propriedades %}
+
+    <h2 style="text-align: center;">Você ainda não cadastrou alguma propriedade. Cadastre acima!</h2>
+    <div class="table-container">
+        <table class="modern-table">
+        <thead>
+            <tr>
+                <th>Nome da Propriedade</th>
+                <th>Tipo de Propriedade</th>
+                <th>Ver Mais</th>
+                <th>Atualizar</th>
+                <th>Apagar</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>
+                        <h1></h1>
+                    </td>
+                    <td>
+                        <h1></h1>
+                    </td>
+                    <td>
+                        <h1></h1>
+                    </td>
+                    <td>
+                        <h1></h1>
+                    </td>
+                    <td>
+                        <h1></h1>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+</div>
+    {% else %}
+    <div class="table-container">
+        <table class="modern-table">
+        <thead>
+            <tr>
+                <th>Quartos</th>
+                <th>Nome da Propriedade</th>
+                <th>Tipo de Propriedade</th>
+                <th>Ver Mais</th>
+                <th>Atualizar</th>
+                <th>Apagar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for propriedade in propriedades %}
+                <tr>
+                    {% if propriedade.tipo_propriedade == 'hotel' or propriedade.tipo_propriedade == 'pousada' %}
+                    <td><a href="{% url 'salvar_config_quarto' id_propriedade=propriedade.id %}"><button class="btn btn-primary">Quartos</button></a></td>
+                    {% else %}
+                    <td><p style="font-size: 90%; margin-bottom: 0; margin-top: 0">Essa propriedade não suporta quartos</p></td>
+                    {% endif %}
+                    <td>{{ propriedade.nome_da_propriedade }}</td>
+                    <td>
+                        {{ propriedade.tipo_propriedade }}
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCalendar{{ propriedade.id }}{{ propriedade.tipo_propriedade }}">
+                            <i class="fas fa-plus"></i>
+
+                    </button>
+                    <div class="modal fade" id="modalCalendar{{ propriedade.id }}{{ propriedade.tipo_propriedade }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    
+                                    <h5 class="modal-title" id="exampleModalLabel">Mais informações da sua propriedade: {{ propriedade.nome_da_propriedade }}</h5>
+                                    
+                                
+                                </div>
+                                <div class="modal-body">
+                                    <div id="calendario{{ propriedade.id }}{{ propriedade.tipo_propriedade }}"></div> <br>
+                                    <h3>Dados dos hóspedes:</h3>
+                                    <div class="table-container">
+                                        <table class="modern-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Período da Estadia</th>
+                                                <th>Contatos</th>
+                                                <th>Mais detalhes</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for reserva in datas_reservadas %}
+                                                {% if reserva.id_propriedade == propriedade.id and reserva.tipo_propriedade == propriedade.tipo_propriedade %}
+                                                    <tr>
+                                                        <td>{{ reserva.hospede_nome }}</td>
+                                                        <td>Do dia {{ reserva.start }} até {{ reserva.end }}</td>
+                                                        <td>
+                                                            Telefone: {{ reserva.hospede_nome.telefone }}
+                                                        </td>
+                                                        <td>
+                                                          
+                                                            <button id="mostrarInfo" type="button" class="btn btn-primary" data-toggle="modal" data-target="#cardInfo{{ reserva.reserva_id }}">
+                                                                <i class="fas fa-plus"></i>
+                                                            </button>
+                                                            <div id="cardInfo{{ reserva.reserva_id }}" class="fade card detalhes" tabindex="-1" role="dialog" aria-hidden="true">
+                                                                
+                                                                <div class="table-container">
+                                                                    <button type="button" class="close" data-dismiss="card" aria-label="Close " onclick="fecharModal('cardInfo{{ reserva.reserva_id }}')"  >
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                    <table class="modern-table">
+                                        
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Valor</th>
+                                                                                <th>Mais Contatos</th>
+                                                                                <th>Remover</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                                    <tr>
+                                                                                        <td>R$ {{ reserva.valor_total }}</td>
+                                                                                        <td>
+                                                                                            Email: {{ reserva.hospede_nome.email }}
+                                                                                            Whatsapp: <a href="{{ reserva.whatsapp }}" target="_blank">Clique aqui!</a>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <form id="deleteForm" method="post" action="/excluir_reserva/{{ reserva.reserva_id }}/"> 
+                                                                                                {% csrf_token %} 
+                                                                                                <!-- Botão para excluir reserva -->
+                                                                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmarExclusaoReservaModal{{ reserva.reserva_id }}">
+                                                                                                    <i class="fas fa-trash-alt"></i>
+                                                                                                </button>
+                                                                                                <!-- Modal de confirmação para exclusão de reserva -->
+                                                                                                <div class="modal fade" id="confirmarExclusaoReservaModal{{ reserva.reserva_id }}" tabindex="-1" role="dialog" aria-labelledby="confirmarExclusaoReservaModalLabel" aria-hidden="true">
+                                                                                                    <div role="document">
+                                                                                                        <div class="modal-content">
+                                                                                                            <div class="modal-header">
+                                                                                                                <h5 class="modal-title" id="confirmarExclusaoReservaModalLabel">Confirmar Exclusão</h5>
+                                                                                                              
+                                                                                                            </div>
+                                                                                                            <div class="modal-body">
+                                                                                                                Tem certeza de que deseja apagar esta reserva?
+                                                                                                            </div>
+                                                                                                            <div class="modal-footer">
+                                                                                                                <button type="button" class="btn btn-secondary btn-sm" onclick="fecharModal('confirmarExclusaoReservaModal{{ reserva.reserva_id }}')">Cancelar</button>
+                                                                                                                <button type="button" class="btn btn-danger btn-sm" id="confirmarExclusaoReservaBtn">Confirmar</button>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </form>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                
+                                                                </div>
+                                                                <div></div>
+                                                            </div>
+                    
+                                                            
+                                                        </td>
+        
+                                                    </tr>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </tbody>
+                                    </table> 
+                                    
+                                    </div>
+                                    {% if propriedade.tipo_propriedade == 'hotel' or propriedade.tipo_propriedade == 'pousada' %}
+                                    <h3>Quartos da propriedade</h3>
+                                    <div class="table-container">
+                                    <table class="modern-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Quarto</th>
+                                                <th>Atualizar</th>
+                                                <th>Apagar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for quarto in quarto_hotel %}
+                                            {% if quarto.propriedade_hotel_id == propriedade.id %}
+                                                    <tr>
+                                                        <td>{{ quarto.nome_do_quarto }}</td>
+                                                        <td>
+                                                            <a href="{% url 'atualizar_quarto' propriedade.id quarto.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                                        </td>
+                                                        <td>
+                                                            <form id="deletePropriedadeForm" method="post" action="{% url 'excluir_quarto' quarto.pk %}">
+                                                                {% csrf_token %}
+                                                                <button type="button" class="btn btn-danger" id="openModalQuartoBtn" data-toggle="modal" data-target="#confirmarExclusaoQuartoModal{{ quarto.pk }}"><i class="fas fa-trash"></i></button>
+                                                                <div class="modal fade" id="confirmarExclusaoQuartoModal{{ quarto.pk }}" tabindex="-1" role="dialog" aria-labelledby="confirmarExclusaoQuartoModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="confirmarExclusaoQuartoModalLabel">Confirmar Exclusão</h5>
+                                                                            
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                Tem certeza de que deseja excluir o quarto {{ quarto.nome_do_quarto }}?
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" onclick="fecharModal('confirmarExclusaoQuartoModal{{ quarto.pk }}')">Cancelar</button>
+                                                                                <button type="submit" class="btn btn-danger" id="confirmarExclusaoPropriedadeBtn">Confirmar</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            {% endif %}
+                                            {% endfor %}
+                                    </table>
+                                </div>
+                                    {% endif %}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </td>
+                    <td>
+                        <a href="{% url 'atualizar_propriedade' propriedade.tipo_propriedade propriedade.id %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                    </td>
+                    <td>
+                        <form id="deletePropriedadeForm" method="post" action="{% url 'excluir_propriedade' propriedade.tipo_propriedade propriedade.id %}">
+                            {% csrf_token %}
+                            <button type="button" class="btn btn-danger" id="openModalPropriedadeBtn" data-toggle="modal" data-target="#confirmarExclusaoPropriedadeModal{{ propriedade.tipo_propriedade }}{{ propriedade.id }}"><i class="fas fa-trash"></i></button>
+                            <div class="modal fade" id="confirmarExclusaoPropriedadeModal{{ propriedade.tipo_propriedade }}{{ propriedade.id }}" tabindex="-1" role="dialog" aria-labelledby="confirmarExclusaoPropriedadeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="confirmarExclusaoPropriedadeModalLabel">Confirmar Exclusão</h5>
+                                          
+                                        </div>
+                                        <div class="modal-body">
+                                            Tem certeza de que deseja excluir a propriedade {{ propriedade.nome_da_propriedade }}?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-danger" id="confirmarExclusaoPropriedadeBtn">Confirmar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                    
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    {% endif %}
+    <div class="space"></div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/pt-br.min.js"></script>
+<script>
+$(document).ready(function() {
+    {% for propriedade in propriedades %}
+        var reservas_prop{{ propriedade.id }} = [
+            {% for reserva in datas_reservadas %}
+                {% if reserva.id_propriedade == propriedade.id and reserva.tipo_propriedade == propriedade.tipo_propriedade %}
+                    {
+                        title: 'Reservado para {{ reserva.hospede_nome.nome }}',
+                        start: moment('{{ reserva.start }}', 'DD/MM/YYYY').format('YYYY-MM-DD'),
+                        end: moment('{{ reserva.end }}', 'DD/MM/YYYY').add(1, 'day').format('YYYY-MM-DD'),
+                        color: 'red'
+                    },
+                {% endif %}
+            {% endfor %}
+        ];
+        $('#calendario{{ propriedade.id }}{{ propriedade.tipo_propriedade }}').fullCalendar({
+            events: reservas_prop{{ propriedade.id }},
+            locale: 'pt-br'
+        });
+    {% endfor %}
+});
+
+</script>
+<script>
+    function fecharModal(id) {
+        $('#' + id).modal('hide');
+    }
+</script>
+
+
+
+
+
+</body>
+</html>
+
+{% endblock %}

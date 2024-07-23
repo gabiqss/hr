@@ -1,0 +1,820 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+	<html class="no-js"> <!--<![endif]-->
+	<head>
+	<link rel="icon" href="{% static 'seta-em-loop.ico' %}" type="image/x-icon">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Hospeda Recife &mdash; Alugue por temporada!</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Alugue por temporada!" />
+	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+	<meta name="author" content="FREEHTML5.CO" />
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
+	<!-- Qaulquer coisa -->
+	
+  <!-- 
+	///////////////////////// /////////////////////////////
+
+	FREE HTML5 TEMPLATE 
+	DESIGNED & DEVELOPED by FREEHTML5.CO
+		
+	Website: 		http://freehtml5.co/
+	Email: 			info@freehtml5.co
+	Twitter: 		http://twitter.com/fh5co
+	Facebook: 		https://www.facebook.com/fh5co
+
+	//////////////////////////////////////////////////////
+	 -->
+
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-KhLlEV/5K4c6Wn9PtAaPiEN8rfbhg3z5TUF/+hQpnb9E0W2+tXc6WO27u7sP0PT1ur2hUXF4G1d3gblbwl8+lcA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+	<!-- Animate.css -->
+	<link rel="stylesheet" href={% static "css/animate.css" %}>
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href={% static "css/icomoon.css" %}>
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href={% static "css/bootstrap.css" %}>
+	<!-- Superfish -->
+	<link rel="stylesheet" href={% static  "css/superfish.css" %}>
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href={% static  "css/magnific-popup.css" %}>
+	<!-- Date Picker -->
+	<link rel="stylesheet" href={% static "css/bootstrap-datepicker.min.css" %}>
+	<!-- CS Select -->
+	<link rel="stylesheet" href={% static "css/cs-select.css" %}>
+	<link rel="stylesheet" href={% static "css/cs-skin-border.css" %}>
+	
+	<link rel="stylesheet" href={% static "css/style.css" %}>
+	<link rel="stylesheet" href={% static "css/carousel.css" %}>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<style>
+		.material-symbols-outlined {
+		  font-variation-settings:
+		  'FILL' 0,
+		  'wght' 400,
+		  'GRAD' 0,
+		  'opsz' 24
+		}
+		</style>
+		<style>
+		/* Adicione este estilo para limitar o número de linhas e adicionar reticências */
+		.blog-text {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp: 3; /* Número de linhas que você deseja exibir */
+			-webkit-box-orient: vertical;
+		}
+		
+		/* Adicione este estilo para evitar quebras de palavra */
+		.blog-text p {
+			overflow-wrap: break-word;
+			word-wrap: break-word;
+			hyphens: auto;
+		}
+		/* Adicione este estilo para limitar o número de linhas e adicionar reticências */
+.blog-text .prod-title p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Número de linhas que você deseja exibir */
+    -webkit-box-orient: vertical;
+}
+
+/* Adicione este estilo para evitar quebras de palavra */
+.blog-text .prod-title p {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+/* Adicione este estilo para limitar o número de linhas do título e adicionar reticências */
+.blog-text .prod-title h3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Número de linhas que você deseja exibir */
+    -webkit-box-orient: vertical;
+}
+
+
+</style>
+	<!-- Modernizr JS -->
+	
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+	<div class="response">
+	<body>
+
+		<div id="fh5co-wrapper">
+		<div id="fh5co-page">
+
+		<header id="fh5co-header-section" class="sticky-banner">
+			<div class="container">
+				<div class="nav-header">
+					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
+					<h1 id="fh5co-logo"><a href="/"><img class="rounded-circle" src={% static 'images/logo_hospeda.png' %} style="width: 162.5px; height: 50px;"></a></h1>
+					
+					<!-- START #fh5co-menu-wrap -->
+					<nav id="fh5co-menu-wrap" role="navigation">
+						<ul class="sf-menu" id="fh5co-primary-menu">
+							<li class="active js-fh5co-nav-item"><a href="/">Home</a></li>
+							<li>
+								<a href="{% url 'localidades' %}" class="fh5co-sub-ddown">Viagens</a>
+								<ul class="fh5co-sub-menu">
+									{% for cidade in carrossel %}
+									<li><a href="{{ cidade.link }}">{{cidade.nome }}</a></li>
+									{% endfor %}
+									<li><a href="{% url 'localidades' %}">Mais Destinos</a></li>
+								</ul>
+							</li>
+							<li class="js-fh5co-nav-item"><a href="#meu-destino">Preferidos</a></li>
+							<li><a href="{% url 'indicacoes' %}">Indicações</a></li>
+							<li class="js-fh5co-nav-item"><a href="{% url 'blog' %}">Blog Hospeda</a></li>
+							<li><a href="{% url 'sobre' %}">Sobre</a></li>
+							
+							{% if user.is_authenticated %}
+							<li>
+								<a href="#" class="fh5co-sub-ddown">Olá, {{ user }}</a>
+								<ul class="fh5co-sub-menu">
+									<li><a href="{% url 'perfil' %}">Perfil</a></li>
+									{% if not user.is_anfitriao %}
+									<li><a href="{% url 'suas_reservas' %}">Suas reservas</a></li>
+									{% endif %}
+									{% if user.is_anfitriao %}
+									<li><a href="{% url 'anfitriao' %}">Anfitrião</a></li>
+									{% endif %}
+									<li><a href="{% url 'logout' %}">Sair</a></li>
+								</ul>
+							</li>
+								{% else %}
+								<li><a href="{% url 'login_index' %}">Login</a></li>
+								{% endif %}
+						</ul>
+					</nav>
+				</div>	
+			</div>
+		</header>
+		<!-- end:header-top -->
+		<div class="background">
+		<div class="fh5co-hero">
+			<!-- template.html -->
+
+			<div class="fh5co-overlay"></div>
+			
+
+		
+			<div class="fh5co-cover" data-stellar-background-ratio="1">
+				{% if messages %}
+    <div id="alert-container" class="alert alert-success">
+        {% for message in messages %}
+            <strong>{{ message }}</strong>
+        {% endfor %}
+    </div>
+
+    <script>
+        // Aguarde 3 segundos e, em seguida, remova o alerta
+        setTimeout(function() {
+            var alertContainer = document.getElementById('alert-container');
+            if (alertContainer) {
+                alertContainer.classList.add('fade-out');
+                setTimeout(function() {
+                    alertContainer.remove();
+                }, 1000);  // Tempo da transição de fade-out (em milissegundos)
+            }
+        }, 3000);  // 3000 milissegundos = 3 segundos
+    </script>
+{% endif %}
+				<div class="desc">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-5 col-md-5">
+								<div class="tabulation animate-box">
+
+								  <!-- Nav tabs -->
+								   <ul class="nav nav-tabs" role="tablist">
+
+								      <li role="presentation">
+										<p style="background-color: #F78536; padding: 10px; color: white; font-family: 'Open Sans', Arial, sans-serif;">
+											<strong>Buscar Hospedagem:</strong>
+										</p>
+								      </li>
+								   </ul>
+
+								   <!-- Tab panes -->
+								   <form id="search-form" role="tabpanel" class="tab-pane active" id="hotels">
+									<div class="tab-content">
+									 <div role="tabpanel" class="tab-pane active" id="hotels">
+										<div class="row">
+											<div class="col-sm-12 mt">
+												<section>
+													<label for="destino">Destino:</label>
+													<select id="destino" class="select2" required></select>
+											</div>
+											<div class="col-sm-12 mt">
+												<section>
+													<label for="tipo_de_hospedagem">Tipo de hospedagem:</label>
+													<select id="tipo_hospedagem" class="select2" required></select>
+											</div>
+
+											<div class="col-xxs-12 col-xs-6 mt alternate">
+												<div class="input-field">
+													<label for="date-start">Check In:</label>
+													<input type="text" class="form-control" id="date-start" placeholder="dd/mm/aaaa"/ required>
+												</div>
+											</div>
+											<div class="col-xxs-12 col-xs-6 mt alternate">
+												<div class="input-field">
+													<label for="date-end">Check Out:</label>
+													<input type="text" class="form-control" id="date-end" placeholder="dd/mm/aaaa"/ required>
+												</div>
+											</div>
+											<div class="col-xxs-12 col-xs-6 mt">
+												<section>
+													<label  for="class">Adultos:</label>
+													<select id="adultos" class="cs-select cs-skin-border">
+														<option value="1" disabled selected>1</option>
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+													</select>
+												</section>
+											</div>
+											<div class="col-xxs-12 col-xs-6 mt">
+												<section>
+													<label  for="class">Crianças:</label>
+													<select id="criancas" class="cs-select cs-skin-border">
+														<option value="0" disabled selected>0</option>
+														<option value="0">0</option>
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+													</select>
+												</section>
+											</div>
+											<div class="col-sm-12 mt">
+												<section>
+													<label  for="class">Pet:</label>
+													<select id="permite_pet" class="cs-select cs-skin-border">
+														<option value="Sim" disabled selected>Sim</option>
+														<option value="Sim">Sim</option>
+														<option value="Não">Não</option>
+													</select>
+												</section>
+											</div>
+											<div class="col-xs-12">
+												<input type="submit" class="btn btn-primary btn-block" value="Buscar">
+
+											</div>
+										</div>
+									 </div>
+									</form>
+									 <div role="tabpanel" class="tab-pane" id="hotels">
+									 	<div class="row">
+											<div class="col-xxs-12 col-xs-6 mt alternate">
+												<div class="input-field">
+													<label for="date-start">Return:</label>
+													<input type="text" class="form-control" id="date-start" placeholder="mm/dd/yyyy"/>
+												</div>
+											</div>
+											<div class="col-xxs-12 col-xs-6 mt alternate">
+												<div class="input-field">
+													<label for="date-end">Check Out:</label>
+													<input type="text" class="form-control" id="date-end" placeholder="mm/dd/yyyy"/>
+												</div>
+											</div>
+											<div class="col-sm-12 mt">
+												<section>
+													<label for="class">Rooms:</label>
+													<select class="cs-select cs-skin-border">
+														<option value="" disabled selected>1</option>
+														<option value="economy">1</option>
+														<option value="first">2</option>
+														<option value="business">3</option>
+													</select>
+												</section>
+											</div>
+											<div class="col-xxs-12 col-xs-6 mt">
+												<section>
+													<label for="class">Adult:</label>
+													<select class="cs-select cs-skin-border">
+														<option value="" disabled selected>1</option>
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+													</select>
+												</section>
+											</div>
+											<div class="col-xxs-12 col-xs-6 mt">
+												<section>
+													<label for="class">Children:</label>
+													<select class="cs-select cs-skin-border">
+														<option value="" disabled selected>1</option>
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+													</select>
+												</section>
+											</div>
+											<div class="col-xs-12">
+												<input type="submit" class="btn btn-primary btn-block" value="Search Hotel">
+											</div>
+										</div>
+									 </div>
+
+									 <div role="tabpanel" class="tab-pane" id="packages">
+									 	<div class="row">
+											<div class="col-xxs-12 col-xs-6 mt">
+												<div class="input-field">
+													<label for="from">City:</label>
+													<input type="text" class="form-control" id="from-place" placeholder="Los Angeles, USA"/>
+												</div>
+											</div>
+											<div class="col-xxs-12 col-xs-6 mt">
+												<div class="input-field">
+													<label for="from">Destination:</label>
+													<input type="text" class="form-control" id="to-place" placeholder="Tokyo, Japan"/>
+												</div>
+											</div>
+											<div class="col-xxs-12 col-xs-6 mt alternate">
+												<div class="input-field">
+													<label for="date-start">Departs:</label>
+													<input type="text" class="form-control" id="date-start" placeholder="mm/dd/yyyy"/>
+												</div>
+											</div>
+											<div class="col-xxs-12 col-xs-6 mt alternate">
+												<div class="input-field">
+													<label for="date-end">Return:</label>
+													<input type="text" class="form-control" id="date-end" placeholder="mm/dd/yyyy"/>
+												</div>
+											</div>
+											<div class="col-sm-12 mt">
+												<section>
+													<label for="class">Rooms:</label>
+													<select class="cs-select cs-skin-border">
+														<option value="" disabled selected>1</option>
+														<option value="economy">1</option>
+														<option value="first">2</option>
+														<option value="business">3</option>
+													</select>
+												</section>
+											</div>
+											<div class="col-xxs-12 col-xs-6 mt">
+												<section>
+													<label for="class">Adult:</label>
+													<select class="cs-select cs-skin-border">
+														<option value="" disabled selected>1</option>
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+													</select>
+												</section>
+											</div>
+											<div class="col-xxs-12 col-xs-6 mt">
+												<section>
+													<label for="class">Children:</label>
+													<select class="cs-select cs-skin-border">
+														<option value="" disabled selected>1</option>
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+													</select>
+												</section>
+											</div>
+
+											<div class="col-xs-12">
+												<input type="submit" class="btn btn-primary btn-block" value="Search Packages">
+											</div>
+										</div>
+									 </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			<div id="fh5co-tours" class="fh5co-section-gray">
+				<div class="container" id="background-container">
+					<div id="meu-destino" class="row">
+						<div  class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+							<h3>Destinos preferidos</h3>
+							<p>Visite praias, campos, fazendas, cachoeiras...</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="carousel-container">
+							<button class="carousel-btn left-btn" onclick="moveCarousel('left')">&#8249;</button>
+							<div class="carousel" id="myCarousel">
+								{% for cidade in carrossel %}
+									<div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+										<div class="carousel-inner">
+											<img src="{{ cidade.imagem }}" alt="Imagem de {{ cidade.nome }}" class="img-responsive">
+											<div class="desc">
+												<span></span>
+												<h3 class="nome">{{ cidade.nome }}</h3>
+												<a class="btn btn-primary btn-outline" href="{{ cidade.link }}">Veja agora! <i class="icon-arrow-right22"></i></a>
+											</div>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+						<button class="carousel-btn right-btn" onclick="moveCarousel('right')">&#8250;</button>
+						</div>
+
+						<div class="col-md-12 text-center animate-box">
+							<p><a class="btn btn-primary btn-outline btn-lg" href="{% url 'localidades' %}">Veja todos os destinos <i class="icon-arrow-right22"></i></a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		<div id="parceiros"> 
+			
+		<div id="fh5co-features">
+			<div class="container">
+				<div id="indicacoes" class="row">
+					<div  class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+						<h3>Indicações</h3>
+						<p>Confira nossas indicações de estabelecimentos na região!</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 animate-box">
+						<div class="feature-left">
+							<span class="icon">
+								<span class="material-symbols-outlined">
+									medication
+								</span>
+							</span>
+							<div class="feature-copy">
+								<h3>Farmácias</h3>
+								<p>Encontre/conheça as Farmácias da região.</p>
+								<p><a href="/indicacoes/?q=farmacia">Explorar</a></p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 animate-box">
+						<div class="feature-left">
+							<span class="icon">
+								<span class="material-symbols-outlined">
+									restaurant
+								</span>
+							</span>
+							<div class="feature-copy">
+								<h3>Restaurantes</h3>
+								<p>Conheça restaurantes parceiros.</p>
+								<p><a href="/indicacoes/?q=restaurante">Explorar</a></p>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-4 animate-box">
+						<div class="feature-left">
+							<span class="icon">
+								<span class="material-symbols-outlined">
+									shopping_basket
+								</span>
+							</span>
+							<div class="feature-copy">
+								<h3>Supermercados</h3>
+								<p>Lojas parceiras.</p>
+								<p><a href="/indicacoes/?q=supermercados">Explorar</a></p>
+							</div>
+						</div>
+					</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 animate-box">
+					
+							<div class="feature-left">
+								<span class="icon">
+									<span class="material-symbols-outlined">
+										local_hospital
+									</span>
+								</span>
+								<div class="feature-copy">
+									<h3>Hospitais</h3>
+									<p>Em caso de emergência, encontre os hospitais mais próximos.</p>
+									<p><a href="/indicacoes/?q=hospitais">Explorar</a></p>
+								</div>
+							</div>
+					
+						</div>
+					
+
+					<div class="col-md-4 animate-box">
+						<div class="feature-left">
+							<span class="icon">
+								<span class="material-symbols-outlined">
+									public
+								</span>
+							</span>
+							<div class="feature-copy">
+								<h3>Turismo</h3>
+								<p>Pontos turísticos</p>
+								<p><a href="/indicacoes/?q=turismo">Explorar</a></p>
+							</div>
+						</div>
+
+					</div>
+					<div class="col-md-4 animate-box">
+						<div class="feature-left">
+							<span class="icon">
+								<i class="icon-chat"></i>
+							</span>
+							<div class="feature-copy">
+								<h3>??</h3>
+								<p>--------????-----------.</p>
+								<p><a href="#">Explorar</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="conteudo">
+		<div id="fh5co-blog-section" class="fh5co-section-gray">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+						<h3>Blog Hospeda</h3>
+						<p>Na dúvida de onde ir? Conheça mais sobre os principais destinos.</p>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row row-bottom-padded-md">
+					{% for post in posts|slice:":3" %}
+					<div class="col-lg-4 col-md-4 col-sm-6">
+						<div class="fh5co-blog animate-box">
+							{% if post.imagem %}
+							<a href="{% url 'post' post.pk %}"><img class="img-responsive" src="{{ post.imagem.url }}" alt=""></a>
+							{% else %}
+							<a href="{% url 'post' post.pk %}"><img class="img-responsive" src="" alt=""></a>
+							{% endif %}
+							<div class="blog-text">
+								<div class="prod-title">
+									<h3><a href="{% url 'post' post.pk %}">{{ post.titulo }}</a></h3>
+									<span class="posted_by">{{ post.data_publicacao }}</span>
+									<!--<span class="comment"><a href="">21<i class="icon-bubble2"></i></a></span>-->
+									<p>{{ post.conteudo }}</p>
+									<p><a href="{% url 'post' post.pk %}">Ler mais...</a></p>
+								</div>
+							</div> 
+						</div>
+					</div>
+					{% endfor %}
+					
+				</div>
+
+				<div class="col-md-12 text-center animate-box">
+					<p><a class="btn btn-primary btn-outline btn-lg" href="{% url 'blog' %}">Veja mais <i class="icon-arrow-right22"></i></a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+		<!-- fh5co-blog-section -->
+		<div id="fh5co-testimonial" style="background-image:url(images/img_bg_1.jpg);">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<h2>O que andam falando...</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="box-testimony animate-box">
+						<blockquote>
+							<span class="quote"><span><i class="icon-quotes-right"></i></span></span>
+							<p>&ldquo;Muito longe, atrás das montanhas das palavras, distante dos países Vokalia e Consonantia, vivem os textos cegos. Separados, eles vivem em Bookmarksgrove, bem na costa da Semântica, um vasto oceano de linguagem.&rdquo;</p>
+						</blockquote>
+						<p class="author">Nome do usuario <a href="http://freehtml5.co/" target="_blank">Nome do hotel</a> <span class="subtext">tempo passado desde o comentário</span></p>
+					</div>
+					
+				</div>
+				<div class="col-md-4">
+					<div class="box-testimony animate-box">
+						<blockquote>
+							<span class="quote"><span><i class="icon-quotes-right"></i></span></span>
+							<p>&ldquo;Muito longe, atrás das montanhas das palavras, distante dos países Vokalia e Consonantia, vivem os textos cegos. Separados, eles vivem em Bookmarksgrove, bem na costa da Semântica, um vasto oceano de linguagem.&rdquo;</p>
+						</blockquote>
+						<p class="author">Nome do usuario <a href="http://freehtml5.co/" target="_blank">Nome do hotel</a> <span class="subtext">tempo passado desde o comentário</span></p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="box-testimony animate-box">
+						<blockquote>
+							<span class="quote"><span><i class="icon-quotes-right"></i></span></span>
+							<p>&ldquo;Muito longe, atrás das montanhas das palavras, distante dos países Vokalia e Consonantia, vivem os textos cegos. Separados, eles vivem em Bookmarksgrove, bem na costa da Semântica, um vasto oceano de linguagem.&rdquo;</p>
+						</blockquote>
+						<p class="author">Nome do usuario <a href="http://freehtml5.co/" target="_blank">Nome do hotel</a> <span class="subtext">tempo passado desde o comentário</span></p>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+		<footer>
+			<div id="footer">
+				<div class="container">
+					
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3 text-center">
+							<p class="fh5co-social-icons">
+								<a href="#"><i class="icon-twitter2"></i></a>
+								<a href="#"><i class="icon-facebook2"></i></a>
+								<a href="#"><i class="icon-instagram"></i></a>
+								<a href="#"><i class="icon-youtube"></i></a>
+							</p>
+							<p>Hospeda Recife 2023. Todos os direitos reservados. <br>Desenvolvido por <a href="https://proglogic.com.br/" target="_blank">ProgLogic. </a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+	
+
+	</div>
+	<!-- END fh5co-page -->
+
+	</div>
+	<!-- END fh5co-wrapper -->
+
+	<!-- jQuery -->
+
+
+	<script src={% static "js/jquery.min.js" %}></script>
+	<!-- jQuery Easing -->
+	<script src={% static "js/jquery.easing.1.3.js" %}></script>
+	<!-- Bootstrap -->
+	<script src={% static "js/bootstrap.min.js" %}></script>
+	<!-- Waypoints -->
+	<script src={% static "js/jquery.waypoints.min.js" %}></script>
+	<script src={% static "js/sticky.js" %}></script>
+
+	<!-- Stellar -->
+	<script src={% static "js/jquery.stellar.min.js" %}></script>
+	<!-- Superfish -->
+	<script src={% static "js/hoverIntent.js" %}></script>
+	<script src={% static "js/superfish.js" %}></script>
+	<!-- Magnific Popup -->
+	<script src={% static "js/jquery.magnific-popup.min.js" %}></script>
+	<script src={% static "js/magnific-popup-options.js" %}></script>
+	<!-- Date Picker -->
+	<script src={% static "js/bootstrap-datepicker.min.js" %}></script>
+	<!-- CS Select -->
+	<script src={% static "js/classie.js" %}></script>
+	<script src={% static "js/selectFx.js" %}></script>
+	<!-- Certifique-se de incluir os links para jQuery e jQuery UI no seu projeto -->
+	
+	<!-- Main JS -->
+	<script src={% static "js/main.js" %}></script>
+	<!-- Certifique-se de incluir o link para o jQuery no seu projeto -->
+	
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://raw.githubusercontent.com/jquery/jquery-ui/main/ui/i18n/datepicker-pt-BR.js"></script>
+	<script>
+		document.getElementById('search-form').addEventListener('submit', function(event) {
+			event.preventDefault(); // Impede o envio do formulário
+		
+			// Obtemos os valores inseridos nos campos
+			var checkin = document.getElementById('date-start').value;
+			var checkout = document.getElementById('date-end').value;
+			var adultos = document.getElementById('adultos').value;
+			var criancas = document.getElementById('criancas').value;
+			var permitePet = document.getElementById('permite_pet').value;
+			var destino = document.getElementById('destino').value;
+			var tipo = document.getElementById('tipo_hospedagem').value;
+		
+			// Redireciona para a página de destinos com os parâmetros da busca
+			window.location.href = '/' + destino + '/destinos/?checkin=' + checkin + '&checkout=' + checkout + '&adultos=' + adultos + '&criancas=' + criancas + '&permite_pet=' + permitePet + '&tipo_hospedagem=' + tipo;
+		});
+		</script>
+<script>
+    // Adiciona a classe 'show' quando o botão de menu é clicado
+    document.querySelector('.js-fh5co-nav-toggle').addEventListener('click', function() {
+        var headerSection = document.getElementById('fh5co-header-section');
+        headerSection.classList.toggle('show');
+        headerSection.classList.remove('unshow'); // Remove a classe 'unshow' se estiver presente
+    });
+
+    // Adiciona um ouvinte de evento aos itens de navegação para remover a classe 'show' ao serem clicados
+    var navItems = document.querySelectorAll('.js-fh5co-nav-item');
+    navItems.forEach(function(navItem) {
+        navItem.addEventListener('click', function() {
+            var headerSection = document.getElementById('fh5co-header-section');
+            headerSection.classList.remove('show');
+            headerSection.classList.add('unshow'); // Adiciona a classe 'unshow' para ocultar a barra lateral
+        });
+    });
+</script>
+
+		
+	<script src={% static "js/modernizr-2.6.2.min.js" %}></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var localidades = [
+			{ id: "", text: "Selecione uma localidade" },
+            {% for localidade in localidades %}
+                { id: "{{ localidade.localizacao }}", text: "{{ localidade.localizacao }}" },
+            {% endfor %}
+        ];
+
+        $('#destino').select2({
+            data: localidades,
+            tags: true,
+			placeholder: 'Selecione uma localidade',
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        var tipo = [
+				{ id: "", text: "Selecione um tipo de hospedagem" },
+                { id: "casa", text: "Casa" },
+				{ id: "apartamento", text: "Apartamento" },
+				{ id: "hotel", text: "Hotel" },
+				{ id: "quarto", text: "Quarto" },
+				{ id: "pousada", text: "Pousada" },
+        ];
+
+        $('#tipo_hospedagem').select2({
+            data: tipo,
+            tags: true,
+			placeholder: 'Selecione um tipo de hospedagem',
+        });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+<script>
+function moveCarousel(direction) {
+    const carousel = document.getElementById('myCarousel');
+	let scrollAmount;
+    // Verifica a largura da tela
+    if (window.innerWidth <= 768) {
+        // Se a largura for menor ou igual a 768 pixels, ajuste o scrollAmount para a largura total do carrossel
+        scrollAmount = carousel.scrollWidth / 6;
+    } else {
+        // Caso contrário, use o valor padrão (um terço da largura)
+        scrollAmount = carousel.offsetWidth / 3;
+    }
+
+    if (direction === 'left') {
+        carousel.scrollBy({
+            left: -scrollAmount,
+            behavior: 'smooth'
+        });
+    } else {
+        carousel.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
+        });
+    }
+}
+
+
+
+</script>
+	</body>
+</div>
+</html>
+{% endblock %}

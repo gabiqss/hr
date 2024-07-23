@@ -1,0 +1,269 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/registro_login.css' %}">
+    <style>
+        .e-mail {
+            width: 65%;
+        }
+       
+        
+    </style>
+</head>
+<h2>Seja nosso anfitrião!</h2>
+<div class="container">
+    <div class="column">
+        
+        <form method="post" id="confirm">
+            {% csrf_token %}
+            <p>
+                Nome<span style="color: red;">*</span><br>
+                {{ form.nome }}
+            </p>
+            <p>
+                Sobrenome<span style="color: red;">*</span><br>
+                {{ form.sobrenome }}
+            </p>
+            <p>
+                Email<span style="color: red;">*</span><br>
+                {{ form.email }}
+            </p>
+
+            <p>
+                Data de Nascimento<span style="color: red;">*</span><br>
+                {{ form.data_nascimento }}
+            </p>
+
+            <p>
+                CPF<span style="color: red;">*</span><br>
+                {{ form.cpf }}
+            </p>
+            <br>
+            <p>
+                Possui CNPJ? <input type="checkbox" id="possui-cnpj" checked>
+            </p>
+            <input type="hidden" id="cnpj-nao-disponivel" name="cnpj" value="N/A" checked>
+            <p>
+                CNPJ<br>
+                {{ form.cnpj }}
+                <button type="button" id="consulta-cnpj">Consultar</button>
+            </p>
+            <p>
+                Telefone<span style="color: red;">*</span><br>
+                {{ form.telefone }}
+            </p>
+        </div>
+
+        <div class="column">
+            <p>
+                CEP<span style="color: red;">*</span><br>
+                {{ form.cep }}<button type="button" id="consulta-cep">Consultar</button>
+            </p>
+
+            <p>
+                Rua<span style="color: red;">*</span><br>
+                {{ form.rua }}
+            </p>
+            <p>
+                Número<span style="color: red;">*</span><br>
+                {{ form.numero }}
+            </p>
+            <p>
+                Complemento<span style="color: red;">*</span><br>
+                {{ form.complemento }}
+            </p>
+           
+            <p>
+                Cidade<span style="color: red;">*</span><br>
+                {{ form.cidade }}
+            </p>
+            <p>
+                UF<span style="color: red;">*</span><br>
+                {{ form.uf }}
+            </p>
+
+            <p>
+                Senha<span style="color: red;">*</span><br>
+                {{ form.password1 }} <br>
+                <ul>
+                    <li>Sua senha não pode ser muito parecida com o resto das suas informações pessoais.</li>
+                    <li>Sua senha precisa conter pelo menos 8 caracteres.</li>
+                    <li>Sua senha não pode ser uma senha comumente utilizada.</li>
+                    <li>Sua senha não pode ser inteiramente numérica.</li>
+                </ul>
+            </p>
+            <p>
+                Confirmação de Senha<span style="color: red;">*</span><br>
+                {{ form.password2 }} <br>
+                <ul>
+                    <li>Informe a mesma senha informada anteriormente, para verificação.</li>
+                </ul>
+            </p>
+
+            <button type="submit">Registrar</button>
+            {% if form.errors %}
+    <div class="alert alert-danger">
+        <strong>Por favor, corrija os seguintes erros:</strong>
+        <ul>
+            {% for field, errors in form.errors.items %}
+                {{ field|title }}: {{ errors.0 }} <br>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+            
+        </form>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#consulta-cnpj').click(function(){
+            var cnpj = $('#id_cnpj').val().replace(/[^0-9]/g, '');
+            if (cnpj.length == 14) {
+                $.ajax({
+                    url: 'https://www.receitaws.com.br/v1/cnpj/' + cnpj,
+                    dataType: 'jsonp',
+                    success: function(data) {
+                        $('#id_rua').val(data.logradouro);
+                        $('#id_numero').val(data.numero);
+                        $('#id_complemento').val(data.complemento);
+                        $('#id_cep').val(data.cep);
+                        $('#id_cidade').val(data.municipio);
+                        $('#id_uf').val(data.uf);
+                    }
+                });
+            } else {
+                alert('CNPJ inválido');
+            }
+        });
+    });
+
+</script>
+
+<script>
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#consulta-cep').click(function(){
+            var cep = $('#id_cep').val().replace(/[^0-9]/g, '');
+            if (cep.length == 8) {
+                $.ajax({
+                    url: 'https://viacep.com.br/ws/' + cep + '/json/',
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#id_rua').val(data.logradouro);
+                        $('#id_complemento').val(data.complemento);
+                        $('#id_bairro').val(data.bairro);
+                        $('#id_cidade').val(data.localidade);
+                        $('#id_uf').val(data.uf);
+                    }
+                });
+            } else {
+                alert('CEP inválido');
+            }
+        });
+    });
+    $(document).ready(function(){
+    $('#id_rua, #id_complemento, #id_cidade').on('input', function() {
+        this.value = this.value.toUpperCase();
+    });
+
+    $('#id_uf').on('change', function() {
+        this.value = this.value.toUpperCase();
+    });
+});
+
+</script>
+<script>
+    function handlePhone(event) {
+      let input = event.target;
+      let value = input.value.replace(/\D/g, ''); // Remove todos os não-dígitos
+      let formattedValue = '';
+    
+      if (value.length >= 11) {
+        formattedValue = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7, 11)}`;
+      } else if (value.length >= 7) {
+        formattedValue = `(${value.slice(0, 2)}) ${value.slice(2, 6)}-${value.slice(6)}`;
+      } else if (value.length >= 2) {
+        formattedValue = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+      } else {
+        formattedValue = value;
+      }
+    
+      input.value = formattedValue;
+    }
+    </script>
+<script>
+    function handleCPF(event) {
+      let input = event.target;
+      let value = input.value.replace(/\D/g, ''); // Remove todos os não-dígitos
+      let formattedValue = '';
+    
+      if (value.length >= 9) {
+        formattedValue = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6, 9)}-${value.slice(9)}`;
+      } else if (value.length >= 6) {
+        formattedValue = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6)}`;
+      } else if (value.length >= 3) {
+        formattedValue = `${value.slice(0, 3)}.${value.slice(3)}`;
+      } else {
+        formattedValue = value;
+      }
+    
+      input.value = formattedValue;
+    }
+    </script>
+<script>
+    function handleCNPJ(event) {
+      let input = event.target;
+      let value = input.value.replace(/\D/g, ''); // Remove todos os não-dígitos
+      let formattedValue = '';
+    
+      if (value.length >= 12) {
+        formattedValue = `${value.slice(0, 2)}.${value.slice(2, 5)}.${value.slice(5, 8)}/${value.slice(8, 12)}-${value.slice(12)}`;
+      } else if (value.length >= 8) {
+        formattedValue = `${value.slice(0, 2)}.${value.slice(2, 5)}.${value.slice(5, 8)}/${value.slice(8)}`;
+      } else if (value.length >= 5) {
+        formattedValue = `${value.slice(0, 2)}.${value.slice(2, 5)}.${value.slice(5)}`;
+      } else if (value.length >= 2) {
+        formattedValue = `${value.slice(0, 2)}.${value.slice(2)}`;
+      } else {
+        formattedValue = value;
+      }
+    
+      input.value = formattedValue;
+    }
+    </script>
+
+<script>
+    function handleCEP(event) {
+        let input = event.target;
+        let value = input.value.replace(/\D/g, ''); // Remove todos os não-dígitos
+        let formattedValue = '';
+
+        if (value.length >= 5) {
+            formattedValue = `${value.slice(0, 5)}-${value.slice(5)}`;
+        } else {
+            formattedValue = value;
+        }
+
+        input.value = formattedValue;
+    }
+</script>
+<script>
+    document.getElementById('possui-cnpj').addEventListener('change', function() {
+        var cnpjInput = document.getElementById('id_cnpj');
+        var cnpjNaoDisponivelInput = document.getElementById('cnpj-nao-disponivel');
+
+        if (this.checked) {
+            cnpjInput.disabled = false;
+            cnpjNaoDisponivelInput.disabled = true;
+        } else {
+            cnpjInput.disabled = true;
+            cnpjNaoDisponivelInput.disabled = false;
+        }
+    });
+</script>
+{% endblock %}

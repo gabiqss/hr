@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% if request.user.is_superuser %}
+<h1>Atualizar Post</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form_atualizar.imagem }}
+        <div id="preview"></div>
+        {{ form_atualizar.titulo }}
+        <span class="char-count-titulo">128/128</span>
+        {{ form_atualizar.conteudo }}
+        <span class="char-count">1024/1024</span>
+        <button type="submit">Publicar</button>
+    </form>
+    {% endif %}
+    <script>
+        function previewImage(input) {
+            const preview = document.getElementById('preview');
+            preview.innerHTML = '';
+    
+            const fileInput = document.getElementById('id_imagem');
+            const files = fileInput.files;
+    
+            for (const file of files) {
+                const reader = new FileReader();
+    
+                reader.onload = function (e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.classList.add('preview-image');
+                    preview.appendChild(img);
+                };
+    
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+    <script>
+        document.querySelector('.conteudo').addEventListener('input', function() {
+            if (this.value.length > 1024) {
+                this.value = this.value.substring(0, 1024);
+            }
+        });
+        document.querySelector('.conteudo').addEventListener('input', function() {
+            const maxLength = 1024;
+            const currentLength = this.value.length;
+            const remaining = maxLength - currentLength;
+    
+            const charCountElement = document.querySelector('.char-count');
+            charCountElement.textContent = remaining + '/1024';
+        });
+    </script>
+        <script>
+            document.querySelector('.titulo').addEventListener('input', function() {
+                if (this.value.length > 128) {
+                    this.value = this.value.substring(0, 128);
+                }
+            });
+            document.querySelector('.titulo').addEventListener('input', function() {
+                const maxLength = 128;
+                const currentLength = this.value.length;
+                const remaining = maxLength - currentLength;
+        
+                const charCountElement = document.querySelector('.char-count-titulo');
+                charCountElement.textContent = remaining + '/128';
+            });
+        </script>
+{% endblock %}

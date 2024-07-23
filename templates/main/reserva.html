@@ -1,0 +1,926 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Hospeda Recife &mdash; Alugue por temporada!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
+    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+    <meta name="author" content="FREEHTML5.CO" />
+    <link rel="icon" href="{% static 'seta-em-loop.ico' %}" type="image/x-icon">
+    <!-- CSS -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/superfish.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cs-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cs-skin-border.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reserva.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/pt-br.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link rel="stylesheet" href="{% static 'css/calendar.css' %}">
+	<link rel="stylesheet" href={% static "css/carousel.css" %}>
+    
+    <link rel="stylesheet" href="{% static 'css/destinos.css' %}">
+	<script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
+    
+    <style>
+        header{
+            margin-bottom: 25px;
+            top: 0;
+            height: 60px;   
+        }
+        /* Adicione este estilo para o modal e sua sobreposição */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1500; /* Um valor alto para garantir que fique por cima de outros elementos */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+    
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+        }
+    
+        .fecharModal {
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+        }
+        .fas.fa-expand{
+            color: black;
+        }
+        .carousel-container{
+            max-width: 100%;
+            display: block;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            
+            
+        }
+        .container{
+            padding-bottom: 25px;
+        }
+    </style>
+    
+</head>
+
+    <div class="container text-center mt-4"></div>
+    
+    <br>
+    {% if quarto_hotel %}
+    <div class="container">
+        <form method="POST" id="contato_reserva_form" data-quarto-id="{{ quarto }}">
+            {% csrf_token %}
+                <div class="carousel-container">
+                    <button type="button" class="carousel-btn left-btn" onclick="moveCarousel('left')">&#8249;</button>
+                    <div class="carousel" id="myCarousel">                  
+    
+                        <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                            <div class="carousel-inner">
+                                <img src="{{fotos.first.foto1.url}}" alt="" class="img-responsive">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                            <div class="carousel-inner">
+                                <img src="{{fotos.first.foto2.url}}" alt="" class="img-responsive">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                            <div class="carousel-inner">
+                                <img src="{{fotos.first.foto3.url}}" alt="" class="img-responsive">
+                            </div>
+                        </div>               
+    
+                        <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                            <div class="carousel-inner">
+                                <img src="{{fotos.first.foto4.url}}" alt="" class="img-responsive">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                            <div class="carousel-inner">
+                                <img src="{{fotos.first.foto5.url}}" alt="" class="img-responsive">
+                            </div>
+                        </div>
+                        {% if fotos.first.foto6 %}
+                        <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                            <div class="carousel-inner">
+                                <img src="{{fotos.first.foto6.url}}" alt="" class="img-responsive">
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if fotos.first.foto7 %}
+                        <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                            <div class="carousel-inner">
+                                <img src="{{fotos.first.foto7.url}}" alt="" class="img-responsive">
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if fotos.first.foto8 %}
+                        <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                            <div class="carousel-inner">
+                                <img src="{{fotos.first.foto8.url}}" alt="" class="img-responsive">
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if fotos.first.foto9 %}
+                        <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                            <div class="carousel-inner">
+                                <img src="{{fotos.first.foto9.url}}" alt="" class="img-responsive">
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if fotos.first.foto10 %}
+                        <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                            <div class="carousel-inner">
+                                <img src="{{fotos.first.foto10.url}}" alt="" class="img-responsive">
+                            </div>
+                        </div>
+                        {% endif %}
+                      
+                    </div>
+                    <button type="button" class="carousel-btn right-btn" onclick="moveCarousel('right')">&#8250;</button>
+                    
+                </div>
+                
+               <!-- <div class="options" style="margin: auto;">
+                    <div class="option active" style="--optionBackground: url({{ fotos.first.foto1.url }});">
+                        <div class="label">
+                            <div class="icon">
+                                <i class="fas fa-expand"></i>
+                            </div>
+                            <div class="info">
+                                <div class="main">Expandir</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option active" style="--optionBackground: url({{ fotos.first.foto2.url }});">
+                        <div class="label">
+                            <div class="icon">
+                                <i class="fas fa-expand"></i>
+                            </div>
+                            <div class="info">
+                                <div class="main">Expandir</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option active" style="--optionBackground: url({{ fotos.first.foto3.url }});">
+                        <div class="label">
+                            <div class="icon">
+                                <i class="fas fa-expand"></i>
+                            </div>
+                            <div class="info">
+                                <div class="main">Expandir</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option active" style="--optionBackground: url({{ fotos.first.foto4.url }});">
+                        <div class="label">
+                            <div class="icon">
+                                <i class="fas fa-expand"></i>
+                            </div>
+                            <div class="info">
+                                <div class="main">Expandir</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="option active" style="--optionBackground: url({{ fotos.first.foto5.url }});">
+                        <div class="label">
+                            <div class="icon">
+                                <i class="fas fa-expand"></i>
+                            </div>
+                            <div class="info">
+                                <div class="main">Expandir</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if fotos.first.foto6 %}
+                    <div class="option active" style="--optionBackground: url({{ fotos.first.foto6.url }});">
+                        <div class="label">
+                            <div class="icon">
+                                <i class="fas fa-expand"></i>
+                            </div>
+                            <div class="info">
+                                <div class="main">Expandir</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if fotos.first.foto7 %}
+                    <div class="option active" style="--optionBackground: url({{ fotos.first.foto7.url }});">
+                        <div class="label">
+                            <div class="icon">
+                                <i class="fas fa-expand"></i>
+                            </div>
+                            <div class="info">
+                                <div class="main">Expandir</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if fotos.first.foto8 %}
+                    <div class="option active" style="--optionBackground: url({{ fotos.first.foto8.url }});">
+                        <div class="label">
+                            <div class="icon">
+                                <i class="fas fa-expand"></i>
+                            </div>
+                            <div class="info">
+                                <div class="main">Expandir</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if fotos.first.foto9 %}
+                    <div class="option active" style="--optionBackground: url({{ fotos.first.foto9.url }});">
+                        <div class="label">
+                            <div class="icon">
+                                <i class="fas fa-expand"></i>
+                            </div>
+                            <div class="info">
+                                <div class="main">Expandir</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if fotos.first.foto10 %}
+                    <div class="option active" style="--optionBackground: url({{ fotos.first.foto10.url }});">
+                        <div class="label">
+                            <div class="icon">
+                                <i class="fas fa-expand"></i>
+                            </div>
+                            <div class="info">
+                                <div class="main">Expandir</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>-->
+                <div class="row">
+                    <div class="container">
+                    <div>
+                        <p>Bem-vindo à experiência de reservas mais fácil e emocionante! Na nossa página de reservas, você está prestes a embarcar em uma jornada para descobrir propriedades únicas e inesquecíveis em destinos deslumbrantes.</p>
+                
+                        <h2>Explore a Diversidade:</h2>
+                        <p>Seja qual for o seu estilo, temos a propriedade perfeita para você. Das aconchegantes cabanas nas montanhas às sofisticadas casas à beira-mar, oferecemos uma ampla gama de opções para atender aos seus desejos de viagem.</p>
+                
+                        <h2>Reserve com Confiança:</h2>
+                        <p>Nosso processo de reserva é simples e seguro. Garantimos total transparência e flexibilidade para que você possa planejar sua estadia sem preocupações. Reservar conosco significa garantir sua tranquilidade desde o momento da reserva até o último dia da sua estadia.</p>
+                
+                        <h2>Experiências Memoráveis:</h2>
+                        <p>Além de oferecer acomodações excepcionais, estamos comprometidos em proporcionar experiências memoráveis. Descubra atividades locais, restaurantes autênticos e gemas escondidas em cada destino. Sua estadia vai além das quatro paredes - é uma jornada única.</p>
+                
+                        <h2>Atendimento Personalizado:</h2>
+                        <p>Nossa equipe dedicada está pronta para tornar sua estadia perfeita. Seja para ajustar detalhes da reserva ou fornecer recomendações locais, estamos aqui para garantir que sua experiência conosco seja impecável.</p>
+                
+                        <p>Reserve agora e descubra o mundo com conforto, estilo e a garantia de momentos inesquecíveis.</p>
+                    </div>
+                </div>
+                    <h2>Faça sua Reserva</h2>                    
+                    <div class="col-md-6 left">
+                    <h1 class="bottom">‎</h1> 
+                        
+                        {% if request.user.is_authenticated %}
+                        <div class="nome-sobrenome">
+                            <label  class="nome-titulo" for="nome">Nome:</label>
+                            <input class="nome" type="text" name="nome" id="nome" placeholder="Nome" value="{{ request.user.nome }}">
+                        </div>
+                        {% else %}
+                        <div class="nome-sobrenome">
+                            <label  class="nome-titulo" for="nome">Nome:</label>
+                            <input class="nome" type="text" name="nome" id="nome" placeholder="Nome">
+                        </div>
+                        {% endif %}
+                        {% if request.user.is_authenticated %}
+                        <div class="email-telefone">
+                            <label for="email" class="email-titulo">E-mail:</label>
+                            <input class="e-mail" type="email" name="email" id="email" placeholder="E-mail" value="{{ request.user.email }}">
+                            <label for="telefone" class="telefone-titulo">Telefone:</label>
+                            <input class="telefone" type="tel" name="telefone" id="telefone" placeholder="Telefone" value="{{ request.user.telefone }}">
+                        </div>
+                        {% endif %}
+                        <div class="colar">
+                            <label class="label-c">Tipo de quarto</label>
+                            {% if id_propriedade == quarto_hotel.propriedade_hotel %}
+                            {{ form.quarto_hotel }}
+                            {% endif %}
+                        </div>
+                        <div class="colar">
+                            <label class="label-c">Quantidade de pessoas</label>
+                            <input class="qty-pessoa" type="number" name="numero_de_pessoas" id="numero_de_pessoas" placeholder="Número de pessoas" min="1" max="#capacidade-maxima-div" required>
+                        </div>
+                        
+                        <div class="end-msg">
+                            <label class="label-c">Mensagem (opcional)</label>
+                            <textarea rows="5" class="mensagem-input" name="mensagem" id="mensagem" value="Olá, meu nome é {{ request.user.nome }}"></textarea>
+                            <span class="char-count">500/500</span>
+                        </div>
+                        <button class="button-submit" type="submit" name="enviar">Enviar</button>
+                        {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <strong>Por favor, corrija os seguintes erros:</strong>
+                            <ul>
+                                {% for field, errors in form.errors.items %}
+                                    {{ field|title }}: {{ errors.0 }} <br>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    </div>
+                    <div class="col-md-6 right dates-container">
+                        <h1>‎</h1>
+                        <div class="checkin-checkout">
+                            <div class="colar">
+                                <label class="label-c">CHECK IN</label>
+                                <input class="checkin" type="date" name="data_inicio" id="data_inicio" value="{{ checkin }}">
+                            </div>
+                            <div class="colar">
+                                <label class="label-c">CHECK OUT</label>
+                                <input class="checkout" type="date" name="data_fim" id="data_fim" value="{{ checkout }}">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <input type="hidden" name="hospede" value="{% if request.user.is_authenticated %}{{ request.user.id }}{% endif %}">
+                    <input type="hidden" name="propriedade" value="[{{ id_propriedade }}, {{ tipo_propriedade }}]">
+                </div>
+                
+            </div>
+            
+        </form> 
+        <div class="container"></div>
+    {% else %}
+    <form method="POST" id="contato_reserva_form" data-quarto-id="{{ quarto }}">
+        {% csrf_token %}
+        <div class="container">
+            
+            <div class="carousel-container">
+                <button type="button" class="carousel-btn left-btn" onclick="moveCarousel('left')">&#8249;</button>
+                <div class="carousel" id="myCarousel">                  
+
+                    <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                        <div class="carousel-inner">
+                            <img src="{{fotos.first.foto1.url}}" alt="" class="img-responsive">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                        <div class="carousel-inner">
+                            <img src="{{fotos.first.foto2.url}}" alt="" class="img-responsive">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                        <div class="carousel-inner">
+                            <img src="{{fotos.first.foto3.url}}" alt="" class="img-responsive">
+                        </div>
+                    </div>               
+
+                    <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                        <div class="carousel-inner">
+                            <img src="{{fotos.first.foto4.url}}" alt="" class="img-responsive">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                        <div class="carousel-inner">
+                            <img src="{{fotos.first.foto5.url}}" alt="" class="img-responsive">
+                        </div>
+                    </div>
+                    {% if fotos.first.foto6 %}
+                    <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                        <div class="carousel-inner">
+                            <img src="{{fotos.first.foto6.url}}" alt="" class="img-responsive">
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if fotos.first.foto7 %}
+                    <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                        <div class="carousel-inner">
+                            <img src="{{fotos.first.foto7.url}}" alt="" class="img-responsive">
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if fotos.first.foto8 %}
+                    <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                        <div class="carousel-inner">
+                            <img src="{{fotos.first.foto8.url}}" alt="" class="img-responsive">
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if fotos.first.foto9 %}
+                    <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                        <div class="carousel-inner">
+                            <img src="{{fotos.first.foto9.url}}" alt="" class="img-responsive">
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if fotos.first.foto10 %}
+                    <div class="col-md-4 col-sm-6 fh5co-tours animate-box carousel-item">
+                        <div class="carousel-inner">
+                            <img src="{{fotos.first.foto10.url}}" alt="" class="img-responsive">
+                        </div>
+                    </div>
+                    {% endif %}
+                  
+                </div>
+                <button type="button" class="carousel-btn right-btn" onclick="moveCarousel('right')">&#8250;</button>
+                
+            </div>
+            
+            <!-- <div class="options">
+                <div class="option active" style="--optionBackground: url({{ fotos.first.foto1.url }});">
+                    <div class="label">
+                        <div class="icon">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                        <div class="info">
+                            <div class="main">Expandir</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="option active" style="--optionBackground: url({{ fotos.first.foto2.url }});">
+                    <div class="label">
+                        <div class="icon">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                        <div class="info">
+                            <div class="main">Expandir</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="option active" style="--optionBackground: url({{ fotos.first.foto3.url }});">
+                    <div class="label">
+                        <div class="icon">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                        <div class="info">
+                            <div class="main">Expandir</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="option active" style="--optionBackground: url({{ fotos.first.foto4.url }});">
+                    <div class="label">
+                        <div class="icon">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                        <div class="info">
+                            <div class="main">Expandir</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="option active" style="--optionBackground: url({{ fotos.first.foto5.url }});">
+                    <div class="label">
+                        <div class="icon">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                        <div class="info">
+                            <div class="main">Expandir</div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- {% if fotos.first.foto6 %}
+                <div class="option active" style="--optionBackground: url({{ fotos.first.foto6.url }});">
+                    <div class="label">
+                        <div class="icon">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                        <div class="info">
+                            <div class="main">Expandir</div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if fotos.first.foto7 %}
+                <div class="option active" style="--optionBackground: url({{ fotos.first.foto7.url }});">
+                    <div class="label">
+                        <div class="icon">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                        <div class="info">
+                            <div class="main">Expandir</div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if fotos.first.foto8 %}
+                <div class="option active" style="--optionBackground: url({{ fotos.first.foto8.url }});">
+                    <div class="label">
+                        <div class="icon">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                        <div class="info">
+                            <div class="main">Expandir</div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if fotos.first.foto9 %}
+                <div class="option active" style="--optionBackground: url({{ fotos.first.foto9.url }});">
+                    <div class="label">
+                        <div class="icon">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                        <div class="info">
+                            <div class="main">Expandir</div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if fotos.first.foto10 %}
+                <div class="option active" style="--optionBackground: url({{ fotos.first.foto10.url }});">
+                    <div class="label">
+                        <div class="icon">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                        <div class="info">
+                            <div class="main">Expandir</div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div> -->
+            <div class="row">
+                
+                    <h2>Bem-vindo!</h2>
+                    <p>Essa será a experiência de reservas mais fácil e emocionante! Na nossa página de reservas, você está prestes a embarcar em uma jornada para descobrir propriedades únicas e inesquecíveis em destinos deslumbrantes.</p>
+            
+                    <h2>Explore a Diversidade:</h2>
+                    <p>Seja qual for o seu estilo, temos a propriedade perfeita para você. Das aconchegantes cabanas nas montanhas às sofisticadas casas à beira-mar, oferecemos uma ampla gama de opções para atender aos seus desejos de viagem.</p>
+            
+                    <h2>Reserve com Confiança:</h2>
+                    <p>Nosso processo de reserva é simples e seguro. Garantimos total transparência e flexibilidade para que você possa planejar sua estadia sem preocupações. Reservar conosco significa garantir sua tranquilidade desde o momento da reserva até o último dia da sua estadia.</p>
+            
+                    <h2>Experiências Memoráveis:</h2>
+                    <p>Além de oferecer acomodações excepcionais, estamos comprometidos em proporcionar experiências memoráveis. Descubra atividades locais, restaurantes autênticos e gemas escondidas em cada destino. Sua estadia vai além das quatro paredes - é uma jornada única.</p>
+            
+                    <h2>Atendimento Personalizado:</h2>
+                    <p>Nossa equipe dedicada está pronta para tornar sua estadia perfeita. Seja para ajustar detalhes da reserva ou fornecer recomendações locais, estamos aqui para garantir que sua experiência conosco seja impecável.</p>
+            
+                    <p>Reserve agora e descubra o mundo com conforto, estilo e a garantia de momentos inesquecíveis.</p>
+                </div>
+                <h2>Faça sua Reserva</h2>
+                <div class="col-md-6 left">
+                <h1 class="bottom">‎</h1> 
+                    
+                    {% if request.user.is_authenticated %}
+                    <div class="nome-sobrenome">
+                        <label  class="nome-titulo" for="nome">Nome:</label>
+                        <input class="nome" type="text" name="nome" id="nome" placeholder="Nome" value="{{ request.user.nome }}">
+                    </div>
+                    {% else %}
+                    <div class="nome-sobrenome">
+                        <label  class="nome-titulo" for="nome">Nome:</label>
+                        <input class="nome" type="text" name="nome" id="nome" placeholder="Nome">
+                    </div>
+                    {% endif %}
+                    {% if request.user.is_authenticated %}
+                    <div class="email-telefone">
+                        <label for="email" class="email-titulo">E-mail:</label>
+                        <input class="e-mail" type="email" name="email" id="email" placeholder="E-mail" value="{{ request.user.email }}">
+                        <label for="telefone" class="telefone-titulo">Telefone:</label>
+                        <input class="telefone" type="tel" name="telefone" id="telefone" placeholder="Telefone" value="{{ request.user.telefone }}">
+                    </div>
+                    {% endif %}
+                    <div class="colar">
+                        <label class="label-c" style="text-align: center;">Quantidade de pessoas</label>
+                    
+                        <input class="qty-pessoa" type="number" name="numero_de_pessoas" id="numero_de_pessoas" placeholder="Número de pessoas" min="1" max="{{ qtd_hospedes }}" required>
+                    </div>
+                       
+                    
+                    <li>Essa propriedade permite o máximo de {{ qtd_hospedes }} hóspedes</li>
+                    <br>
+                    <div class="end-msg">
+                        <label class="label-c">Mensagem (opcional)</label>
+                        <textarea rows="5" class="mensagem-input" name="mensagem" id="mensagem" value="Olá, meu nome é {{ request.user.nome }}"></textarea>
+                        <span class="char-count">500/500</span>
+                    </div>
+                    <button class="button-submit" type="submit" name="enviar">Enviar</button>
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Por favor, corrija os seguintes erros:</strong>
+                        <ul>
+                            {% for field, errors in form.errors.items %}
+                    {{ field|title }}: {{ errors.0 }} <br>
+                {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                </div>
+                <div class="col-md-6 right dates-container">
+                    <h1>‎</h1>
+                    <div class="checkin-checkout">
+                        <div class="colar">
+                            <label class="label-c">CHECK IN</label>
+                            <input class="checkin" type="date" name="data_inicio" id="data_inicio" value="{{ checkin }}">
+                        </div>
+                        <div class="colar">
+                            <label class="label-c">CHECK OUT</label>
+                            <input class="checkout" type="date" name="data_fim" id="data_fim" value="{{ checkout }}">
+                        </div>
+                    </div>
+                    
+                </div>
+                <input type="hidden" name="hospede" value="{% if request.user.is_authenticated %}{{ request.user.id }}{% endif %}">
+                <input type="hidden" name="propriedade" value="[{{ id_propriedade }}, {{ tipo_propriedade }}]">
+            </div>
+            
+        </div>
+        
+    </form>
+</div>
+    {% endif %}
+    <!-- <h1 class="bottom">‎</h1> 
+    <div id="imagemModal" class="modal">
+        <span class="fecharModal">&times;</span>
+        <img class="modal-content" id="imagemModalConteudo">
+    </div> -->
+     
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/pt-br.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css"/>
+<script src="{% static 'js/calendar.js' %}"></script>
+<script src="{% static 'js/calendario-contato.js' %}"></script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var datas_reservadas = JSON.parse('{{ datas_reservadas_json|escapejs }}');
+    
+            var events = datas_reservadas.map(function(date) {
+                return {
+                    title: 'Reservado',
+                    start: date.data_comeco,
+                    end: moment(date.data_final).add(1, 'day').format('YYYY-MM-DD'),
+                    rendering: 'background',
+                    color: '#ff0000'
+                };
+            });
+    
+            $('#calendario').fullCalendar({
+                events: events,
+                locale: 'pt-br',
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                defaultView: 'month'
+            });
+        });
+    </script>
+    
+    
+    
+    
+    
+    <script>console.log({{ datas_reservadas }});</script>
+    
+
+
+<script>document.querySelector('.button-submit').addEventListener('click', function() {
+    this.classList.add('clicked');
+  
+    // Use setTimeout para remover a classe após um curto período de tempo
+    setTimeout(() => {
+      this.classList.remove('clicked');
+    }, 200); // 200 milissegundos = 0.2 segundos
+  });
+  </script>
+  
+<script>
+    document.querySelector('.mensagem-input').addEventListener('input', function() {
+        if (this.value.length > 500) {
+            this.value = this.value.substring(0, 500);
+        }
+    });
+    document.querySelector('.mensagem-input').addEventListener('input', function() {
+        const maxLength = 500;
+        const currentLength = this.value.length;
+        const remaining = maxLength - currentLength;
+
+        const charCountElement = document.querySelector('.char-count');
+        charCountElement.textContent = remaining + '/500';
+    });
+</script>
+<script>
+jQuery(document).ready(function ($) {
+
+function moveLeft() {
+    $('#slider ul').animate({
+        left: +slideWidth
+    }, 200, function () {
+        $('#slider ul li:last-child').prependTo('#slider ul');
+        $('#slider ul').css('left', '');
+    });
+}
+
+function moveRight() {
+    $('#slider ul').animate({
+        left: -slideWidth
+    }, 200, function () {
+        $('#slider ul li:first-child').appendTo('#slider ul');
+        $('#slider ul').css('left', '');
+    });
+}
+
+function startSlider() {
+    setInterval(function () {
+        moveRight();
+    }, 3000);
+}
+
+var slideCount = $('#slider ul li').length;
+var slideWidth = $('#slider ul li').width();
+var slideHeight = $('#slider ul li').height();
+var sliderUlWidth = slideCount * slideWidth;
+
+$('#slider').css({ width: slideWidth, height: slideHeight });
+
+$('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
+
+$('#slider ul li:last-child').prependTo('#slider ul');
+
+startSlider(); // Inicia o slider automaticamente
+
+$('a.control_prev').click(function () {
+    moveLeft();
+});
+
+$('a.control_next').click(function () {
+    moveRight();
+});
+});
+
+
+</script>
+<!-- Seu HTML existente ... -->
+
+<script>
+var datas_reservadas = JSON.parse('{{ datas_reservadas_json|escapejs }}');
+
+var data_inicio = document.getElementById('data_inicio');
+var data_fim = document.getElementById('data_fim');
+
+data_inicio.addEventListener('input', function() {
+    data_fim.min = this.value;
+});
+
+function validarDatas() {
+    var inicio = new Date(data_inicio.value);
+    var fim = new Date(data_fim.value);
+
+    // Verificar se a data de check-out é posterior à data de check-in
+    if (fim <= inicio) {
+        alert("A data de check-out deve ser posterior à data de check-in.");
+        return false;
+    }
+
+    // Verificar se a data de check-in está na lista de datas reservadas
+    for (var i = 0; i < datas_reservadas.length; i++) {
+        var data_reservada = new Date(datas_reservadas[i].data_comeco);
+        var data_final = new Date(datas_reservadas[i].data_final);
+
+        if (inicio <= data_final && fim >= data_reservada) {
+            alert("Essa data já está reservada.");
+            return false;
+        }
+    }
+
+    return true;
+}
+
+document.querySelector('form').addEventListener('submit', function(e) {
+    if (!validarDatas()) {
+        e.preventDefault();
+    }
+});
+
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var inputNumeroDePessoas = document.getElementById('numero_de_pessoas');
+        var maxPessoas = inputNumeroDePessoas.getAttribute('max');
+        
+        inputNumeroDePessoas.addEventListener('input', function() {
+            if (parseInt(inputNumeroDePessoas.value) > maxPessoas) {
+                inputNumeroDePessoas.value = maxPessoas;
+            }
+        });
+    });
+    </script>
+    <script>
+        document.getElementById('contato_reserva_form').addEventListener('submit', function() {
+            var id_propriedade = document.getElementById('id_propriedade').value;
+            var tipo_propriedade = document.getElementById('tipo_propriedade').value;
+            var propriedade = id_propriedade + ' - ' + tipo_propriedade;
+            document.getElementById('propriedade').value = propriedade;
+        });
+    </script>
+    <script>
+        $(".option").click(function () {
+            $(".option").removeClass("active");
+            $(this).addClass("active");
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".icon ").click(function () {
+                // Obtém a URL da imagem da opção clicada
+                var urlImagem = $(this).css("--optionBackground").replace('url(', '').replace(')', '');
+    
+                // Define a URL da imagem no modal
+                $("#imagemModalConteudo").attr("src", urlImagem);
+    
+                // Exibe o modal
+                $("#imagemModal").css("display", "block");
+            });
+    
+            // Fecha o modal quando o usuário clica no botão de fechar
+            $(".fecharModal").click(function () {
+                $("#imagemModal").css("display", "none");
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $("#quarto").change(function(){
+                // Obtém o valor selecionado no select
+                var capacidadeMaxima = $(this).find("option:selected").data("capacidade-maxima");
+    
+                // Atualiza o texto da capacidade máxima
+                $("#capacidade-maxima-div label").text("Essa propriedade permite o máximo de " + capacidadeMaxima + " hóspedes");
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $("#quarto").change(function(){
+                var quartoSelecionado = $(this).val();
+                $("input[name='quarto_hotel']").val(quartoSelecionado);
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var quartoSelect = document.getElementById("quarto");
+            var quartoHotelInput = document.querySelector("input[name='quarto_hotel']");
+    
+            quartoSelect.addEventListener("change", function() {
+                var quartoSelecionado = quartoSelect.value;
+                quartoHotelInput.value = quartoSelecionado;
+            });
+        });
+    </script>
+<script>
+    function moveCarousel(direction) {
+        const carousel = document.getElementById('myCarousel');
+        let scrollAmount;
+        // Verifica a largura da tela
+        if (window.innerWidth <= 768) {
+            // Se a largura for menor ou igual a 768 pixels, ajuste o scrollAmount para a largura total do carrossel
+            scrollAmount = carousel.scrollWidth / 6;
+        } else {
+            // Caso contrário, use o valor padrão (um terço da largura)
+            scrollAmount = carousel.offsetWidth / 3;
+        }
+    
+        if (direction === 'left') {
+            carousel.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+        } else {
+            carousel.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    }
+    
+    
+    
+    </script>
+{% endblock %}

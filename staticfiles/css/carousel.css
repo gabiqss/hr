@@ -1,0 +1,84 @@
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .carousel {
+    position: relative;
+    display: flex;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    width: 100%;
+    padding: 5px;
+  }
+  
+  .carousel-wrapper {
+    display: flex;
+}
+
+  .carousel-item {
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+    box-sizing: border-box;
+  }
+  
+  .carousel-inner {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .carousel img {
+    width: 100%;
+    height: auto; /* Corrija a altura para manter a proporção */
+  }
+  
+  .carousel .fh5co-tours {
+    flex: 0 0 33.33333%; /* Define a largura de cada item para ocupar 1/3 do espaço disponível */
+    max-width: 33.33333%; /* Define a largura máxima de cada item */
+  }
+  
+  .carousel-button {
+    color: #F78536;
+    cursor: pointer;
+    border: 0;
+    font-size: 0;
+    display: grid;
+    justify-content: center;
+    position: absolute;
+    overflow: visible; /* Mantém os botões visíveis mesmo que transbordem do contêiner */
+  }
+  
+  .carousel-button .arrow {
+    font-size: 20px;
+  }
+  
+  .carousel-button[data-direction="prev"] {
+    left: 1%;
+    transform: translateX(-50%) translateY(-50%);
+    top: 120px;
+  }
+  
+  .carousel-button[data-direction="next"] {
+    right: 1%;
+    transform: translateX(50%) translateY(-50%);
+    top: 120px;
+  }
+  
+  .scroll-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .scroll-left,
+  .scroll-right {
+    cursor: pointer;
+    font-size: 2em;
+    margin: 0 10px;
+  }
+  
+  .scroll-content {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+  }
+  

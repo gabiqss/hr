@@ -1,0 +1,189 @@
+.property-listing { 
+    margin: 10px;
+}
+.fh5co-section-gray{
+    background-color: rgb(0, 0, 0,0);
+}
+/* Estilos para a div property-card */
+.property-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex; /* Adicionado para usar flexbox */
+    max-width: 70%;
+}
+@media screen and (max-width: 768px) {
+    .property-listing {
+        max-width: 100%;
+        margin: 10px;
+    }
+    .property-card {
+        max-width: 100%;
+    }
+    .property-image img {
+        border-radius: 10px;
+        max-width: calc(200px * 0.75); /* 3/4 da largura original */
+        max-height: calc(175px * 0.75); /* 3/4 da altura original */
+        object-fit: cover;
+    }
+    .property-image {
+        display: flex; /* Adicionado para usar flexbox */
+        align-items: center; /* Centraliza verticalmente */
+        padding: 5px;
+    }
+    .property-details {
+        font-size: 15px;
+        display: grid;
+    }
+    .property-card a.btn {
+        padding: 5px 10px;
+        width: 100%;
+
+        font-size: 0.2em;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+    .additional-info {
+        display: none;
+        margin-top: 10px;
+        max-width: 500px;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .info-item {
+        display: none;
+        margin-right: 20px;
+        max-height: 40px;
+        justify-content: center;
+        max-width: 50px;
+    }
+    
+    .info-item i {
+        margin-right: 0%;
+    }
+    
+    .info-item p {
+        margin: 0;
+    }
+    
+    .additional-info {
+        display: none;
+        margin-top: 10px;
+    }
+    
+    .info-item {
+        margin: 0;
+        margin-right: 0px;
+    
+    }
+    .info-item i {
+        margin-right: 0px;
+    }
+}
+
+/* Estilos para a div property-content dentro de property-card */
+.property-content {
+    display: flex; /* Adicionado para usar flexbox */
+    width: 100%; /* Ocupa todo o espaço disponível */
+    justify-content: left;
+}
+
+.property-image {
+    padding: 10px;
+}
+
+/* Estilos para a imagem dentro de property-image */
+.property-image img {
+    border-radius: 10px;
+    width: 200px; /* Tamanho da imagem */
+    height:175px; /* Altura automática para manter proporção */
+    object-fit: cover;
+}
+
+/* Estilos para a div property-details dentro de property-content */
+.property-details {
+    padding: 20px;
+    width: 100%; /* Ocupa todo o espaço disponível */
+    box-sizing: border-box; /* Garante que o padding não altere a largura */
+}
+
+/* Estilos para o título h3 dentro de property-details */
+.property-card h3 {
+    font-size: 1.4em;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+/* Estilos para o span com a classe price dentro de property-details */
+.property-card span.price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #FF5733;
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+/* Estilos para o link com a classe btn dentro de property-details */
+.property-card a.btn {
+    background-color: #FF5733;
+    color: #ffffff;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 1em;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Estilos para o link com a classe btn:hover dentro de property-details */
+.property-card a.btn:hover {
+    background-color: #d6492c;
+}
+
+.additional-info {
+    display: grid;
+    margin-top: 10px;
+    max-width: 400px;
+    justify-content: center;
+    text-align: center;
+}
+
+.info-item {
+    display: grid;
+    margin-right: 20px;
+    max-height: 40px;
+    min-height: 40px;
+    justify-content: center;
+    max-width: 50px;
+    min-width: 50px;
+}
+
+.info-item i {
+    margin-right: 5px;
+    
+}
+
+.info-item p {
+    margin: 0;
+    max-height: 40px;
+    min-height: 40px;
+}
+
+.additional-info {
+    display: flex;
+    margin-top: 10px;
+}
+
+.info-item {
+    margin: 0;
+    margin-right: 20px;
+
+}
+
+
+.info-item i {
+    margin-right: 5px;
+}
+

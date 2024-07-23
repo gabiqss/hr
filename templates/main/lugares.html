@@ -1,0 +1,50 @@
+    {% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/lugares.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
+    <div class="container-lugares">
+        <h1>Confira as Localidades</h1>
+
+        <!-- Formulário de Pesquisa -->
+        <form method="get" action="{% url 'localidades' %}" class="search-form">
+            <label for="search_input"></label><br>
+            <input type="text" id="search_input" name="q" placeholder="Pesquise por uma cidade ou estado">
+            <!-- <select class="select2" id="search_input" name="q"></select> -->
+            <button type="submit" class="btn-orange">Pesquisar</button>
+        </form>
+
+        <!-- Lista de Localidades -->
+        {% if localidades %}
+        <div class="localidades-list">
+            {% for localidade in localidades %}
+                <div class="localidade-card">
+                    <h2>{{ localidade.localizacao }}</h2>
+                    <p>{{ localidade.qty_hotel }} propriedades</p>
+                    <a href="{% url 'destinos' localidade.localizacao %}" class="btn-orange">Ver Destinos</a>
+                </div>
+            {% endfor %}
+        </div>
+        {% else %}
+            <p>Local não encontrado.</p>
+        {% endif %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var localidades = [
+                {% for localidade in localidades %}
+                    { id: "{{ localidade.id }}", text: "{{ localidade.localizacao }}" },
+                {% endfor %}
+            ];
+    
+            $('#search_input').select2({
+                data: localidades,
+                tags: true,
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<link rel="icon" href="{% static 'seta-em-loop.ico' %}" type="image/x-icon">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Hospeda Recife &mdash; Alugue por temporada!</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Alugue por temporada!" />
+	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+	<meta name="author" content="FREEHTML5.CO" />
+    
+	
+	
+  <!-- 
+	///////////////////////// /////////////////////////////
+
+	FREE HTML5 TEMPLATE 
+	DESIGNED & DEVELOPED by FREEHTML5.CO
+		
+	Website: 		http://freehtml5.co/
+	Email: 			info@freehtml5.co
+	Twitter: 		http://twitter.com/fh5co
+	Facebook: 		https://www.facebook.com/fh5co
+
+	//////////////////////////////////////////////////////
+	 -->
+
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href={% static "css/animate.css" %}>
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href={% static "css/icomoon.css" %}>
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href={% static "css/bootstrap.css" %}>
+	<!-- Superfish -->
+	<link rel="stylesheet" href={% static  "css/superfish.css" %}>
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href={% static  "css/magnific-popup.css" %}>
+	<!-- Date Picker -->
+	<link rel="stylesheet" href={% static "css/bootstrap-datepicker.min.css" %}>
+	<!-- CS Select -->
+	<link rel="stylesheet" href={% static "css/cs-select.css" %}>
+	<link rel="stylesheet" href={% static "css/cs-skin-border.css" %}>
+	
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+	    
+	<!-- Modernizr JS -->
+	<script src={% static "js/modernizr-2.6.2.min.js" %}></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+    
+	<body style="background-color: #fff7ea;">
+		<div id="fh5co-wrapper">
+		<div id="fh5co-page">
+
+			<header st id="fh5co-header-section" class="sticky-banner">
+				<div class="container">
+					<div class="nav-header">
+						<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
+						<h1 id="fh5co-logo"><a href="/"><img class="rounded-circle" src={% static 'images/logo_hospeda.png' %} style="width: 162.5px; height: 50px;"></a></h1>
+						
+						<!-- START #fh5co-menu-wrap -->
+						<nav id="fh5co-menu-wrap" role="navigation">
+							<ul class="sf-menu" id="fh5co-primary-menu">
+								<li class="active js-fh5co-nav-item"><a href="/">Home</a></li>
+								<li>
+									<a href="{% url 'localidades' %}" class="fh5co-sub-ddown">Viagens</a>
+									<ul class="fh5co-sub-menu">
+										{% for cidade in carrossel %}
+									<li><a href="{{ cidade.link }}">{{cidade.nome }}</a></li>
+									{% endfor %}
+									<li><a href="{% url 'localidades' %}">Mais Destinos</a></li>
+
+									</ul>
+								</li>
+								<li><a href="{% url 'indicacoes' %}">Indicações</a></li>
+								<li class="js-fh5co-nav-item"><a href="#conteudo">Blog Hospeda</a></li>
+								<li><a href="{% url 'sobre' %}">Sobre</a></li>
+								
+								{% if user.is_authenticated %}
+								<li>
+									<a href="#" class="fh5co-sub-ddown">Olá, {{ user }}</a>
+									<ul class="fh5co-sub-menu">
+										<li><a href="{% url 'perfil' %}">Perfil</a></li>
+										{% if not user.is_anfitriao %}
+										<li><a href="{% url 'suas_reservas' %}">Suas reservas</a></li>
+										{% endif %}
+										{% if user.is_anfitriao %}
+										<li><a href="{% url 'anfitriao' %}">Anfitrião</a></li>
+										{% endif %}
+										<li><a href="{% url 'logout' %}">Sair</a></li>
+									</ul>
+								</li>
+									{% else %}
+									<li><a href="{% url 'login_index' %}">Login</a></li>
+									{% endif %}
+							</ul>
+						</nav>
+					</div>	
+				</div>
+			</header>
+			<div class="background">
+        {% block content %}
+        
+        {% endblock  %}
+		</div>
+
+
+
+		<footer>
+			<div id="footer">
+				<div class="container">
+					
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3 text-center">
+							<p class="fh5co-social-icons">
+								<a href="#"><i class="icon-twitter2"></i></a>
+								<a href="#"><i class="icon-facebook2"></i></a>
+								<a href="#"><i class="icon-instagram"></i></a>
+								<a href="#"><i class="icon-youtube"></i></a>
+							</p>
+							<p>Hospeda Recife 2023. Todos os direitos reservados. <br>Desenvolvido por <a href="https://proglogic.com.br/" target="_blank">ProgLogic. </a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+	
+
+	</div>
+	<!-- END fh5co-page -->
+
+	</div>
+	<!-- END fh5co-wrapper -->
+
+	<!-- jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+	<!-- Bootstrap -->
+	<script src={% static "js/bootstrap.min.js" %}></script>
+	<!-- Waypoints -->
+	<script src={% static "js/jquery.waypoints.min.js" %}></script>
+	<script src={% static "js/sticky.js" %}></script>
+
+	<!-- Stellar -->
+	<script src={% static "js/jquery.stellar.min.js" %}></script>
+	<!-- Superfish -->
+	<script src={% static "js/hoverIntent.js" %}></script>
+	<script src={% static "js/superfish.js" %}></script>
+	<!-- Magnific Popup -->
+	<script src={% static "js/jquery.magnific-popup.min.js" %}></script>
+	<script src={% static "js/magnific-popup-options.js" %}></script>
+	<!-- Date Picker -->
+	<script src={% static "js/bootstrap-datepicker.min.js" %}></script>
+	<!-- CS Select -->
+	<script src={% static "js/classie.js" %}></script>
+	<script src={% static "js/selectFx.js" %}></script>
+	
+	<!-- Main JS -->
+
+	<script>
+		// Adiciona a classe 'show' quando o botão de menu é clicado
+		document.querySelector('.js-fh5co-nav-toggle').addEventListener('click', function() {
+		  document.getElementById('fh5co-header-section').classList.toggle('show');
+		});</script>
+	<script src={% static "js/modernizr-2.6.2.min.js" %}></script>
+	<script src={% static "js/main.js" %}></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://raw.githubusercontent.com/jquery/jquery-ui/main/ui/i18n/datepicker-pt-BR.js"></script>
+
+	</body>
+</html>

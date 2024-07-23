@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planilha Editável</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 40px 0;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+            min-width: 80px;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s ease;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        th:first-child, td:first-child {
+            min-width: 40px;
+        }
+
+        td {
+            position: relative;
+        }
+
+        td:hover {
+            background-color: #f1f1f1;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            border: none;
+            outline: none;
+        }
+
+        .btn-add, .btn-remove {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            position: fixed;
+            z-index: 1;
+        }
+
+        .btn-remove {
+            background-color: #f44336;
+        }
+
+        .btn-add.left {
+            top: 40px;
+            left: 0;
+        }
+
+        .btn-remove.left {
+            top: 80px;
+            left: 0;
+        }
+
+        .btn-add.top {
+            top: 0;
+            left: 40px;
+        }
+
+        .btn-remove.top {
+            top: 0;
+            left: 80px;
+        }
+
+        .add-remove-cell {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .spacer {
+            width: 40px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="spacer"></div>
+    <button class="btn-add left" onclick="addColumn()">Adicionar Coluna</button>
+    <button class="btn-remove left" onclick="removeColumn()">Remover Coluna</button>
+    <button class="btn-add top" onclick="addRow(this)">Adicionar Linha</button>
+    <button class="btn-remove top" onclick="removeRow(this)">Remover Linha</button>
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td contenteditable="true"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function addRow(button) {
+            var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow(table.rows.length - 1);
+            var cell = newRow.insertCell(0);
+            cell.className = "btn-remove";
+            cell.onclick = function () { removeRow(this); };
+            cell.innerHTML = "-";
+            var newCell = newRow.insertCell(1);
+            newCell.contentEditable = true;
+        }
+
+        function removeRow(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+
+        function addColumn() {
+            var table = document.getElementById("myTable");
+            var headerRow = table.rows[0];
+            var newHeaderCell = headerRow.insertCell(headerRow.cells.length - 1);
+            newHeaderCell.contentEditable = true;
+
+            for (var i = 1; i < table.rows.length; i++) {
+                var newRow = table.rows[i];
+                var newCell = newRow.insertCell(newRow.cells.length - 1);
+                newCell.contentEditable = true;
+            }
+        }
+
+        function removeColumn() {
+            var table = document.getElementById("myTable");
+            var headerRow = table.rows[0];
+            if (headerRow.cells.length > 2) {
+                headerRow.deleteCell(headerRow.cells.length - 1);
+
+                for (var i = 1; i < table.rows.length; i++) {
+                    var newRow = table.rows[i];
+                    newRow.deleteCell(newRow.cells.length - 1);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

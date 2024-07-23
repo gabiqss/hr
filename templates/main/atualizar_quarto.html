@@ -1,0 +1,280 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/propriedade.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reserva.css' %}">
+    <style>
+        .btn.btn-primary, .btn.btn-success {
+            margin-bottom: 15%;
+            
+        }
+        .botoes {
+            padding: 10px;
+        }
+        .e-mail {
+            width: 50%;
+        }
+        h1, p {
+            color: black;
+        }
+        @media screen and (max-width: 768px) {
+            .btn.btn-primary {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            .btn.btn-success {
+                margin-bottom: 160px;
+            }
+        }
+    </style>
+    <style>
+        #preview {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .preview-image {
+            max-height: 100px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<h1><br>Atualize os dados do seu quarto! <br> <p>Antes de finalizar, confira os dados!</p></h1>
+
+<form method="POST" enctype="multipart/form-data" class="form" id="confirm">
+    {% csrf_token %}
+
+<div class="botoes">
+    <!-- Botão para abrir o primeiro modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal1">
+        Detalhes dos quartos
+    </button>
+
+    <!-- Botão para abrir o terceiro modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal2">
+        Informações gerais
+    </button>
+    <button type="submit" class="btn btn-success">Salvar</button>
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        <strong>Por favor, corrija os seguintes erros:</strong>
+        <ul>
+            {% for field, errors in form.errors.items %}
+                {{ field|title }}: {{ errors.0 }} <br>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+
+{% if fotos_form.errors %}
+    <div class="alert alert-danger">
+        <strong>Por favor, corrija os seguintes erros no formulário de fotos:</strong>
+        <ul>
+            {% for field, errors in fotos_form.errors.items %}
+                {{ field|title }}: {{ errors.0 }} <br>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+</div>
+
+
+
+<!-- Modal 1 -->
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detalhes dos quartos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="column">
+                    <label for="id_nome_do_quarto">Nome do Quarto<span style="color: red;">*</span></label>
+                    {{ form.nome_do_quarto }}<br>
+
+                    <label for="id_tipo_de_unidade">Tipo de unidade<span style="color: red;">*</span></label>
+                    {{ form.tipo_de_unidade }}<br>
+
+                    <label for="id_qual_a_quantidade_de_quartos_deste_tipo_que_você_tem">Quantidade de quartos desse tipo existentes<span style="color: red;">*</span></label>
+                    {{ form.qual_a_quantidade_de_quartos_deste_tipo_que_você_tem }}<br>
+
+                    <label for="id_quais_camas_estao_disponiveis_neste_quarto">Camas nesse quarto<span style="color: red;">*</span></label>
+                    {{ form.quais_camas_estao_disponiveis_neste_quarto }}<br>
+
+                    <label for="id_quntos_hospedes_podem_ficar_neste_quarto">Quantidade de hóspedes<span style="color: red;">*</span></label>
+                    {{ form.quntos_hospedes_podem_ficar_neste_quarto }}<br>
+
+                    <label for="id_tamanho_do_quarto">Tamanho do Quarto<span style="color: red;">*</span></label>
+                    {{ form.tamanho_do_quarto }}<br>
+                
+                    <label for="id_tamanho_unidade">Tamanho da Unidade<span style="color: red;">*</span></label>
+                    {{ form.tamanho_unidade }}<br>
+
+                    <label for="fotos">Fotos</label>
+                    <p>Adicione no mínimo 5 fotos</p>
+                    <p>obrigatórias<span style="color: red;">*</span>:</p>
+                    <p>Sua foto principal:<input type="file" id="foto1" name="foto1" accept="image/*" onchange="previewImage(this)"></p>
+                    <input type="file" id="foto2" name="foto2" accept="image/*" onchange="previewImage(this)">
+                    <input type="file" id="foto3" name="foto3" accept="image/*" onchange="previewImage(this)">
+                    <input type="file" id="foto4" name="foto4" accept="image/*" onchange="previewImage(this)">
+                    <input type="file" id="foto5" name="foto5" accept="image/*" onchange="previewImage(this)"><br>
+                    <p>opcionais:</p>
+                    <input type="file" id="foto6" name="foto6" accept="image/*" onchange="previewImage(this)">
+                    <input type="file" id="foto7" name="foto7" accept="image/*" onchange="previewImage(this)">
+                    <input type="file" id="foto8" name="foto8" accept="image/*" onchange="previewImage(this)">
+                    <input type="file" id="foto9" name="foto9" accept="image/*" onchange="previewImage(this)">
+                    <input type="file" id="foto10" name="foto10" accept="image/*" onchange="previewImage(this)">
+                    
+                    <div id="preview"></div>
+                    
+                    
+
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Confirmar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal 2 -->
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Informações gerais</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="column">
+                    
+                    <label for="id_quais_itens_do_banheiro_esta_disponivel">Itens disponíveis no banheiro<span style="color: red;">*</span></label>
+                    {{ form.quais_itens_do_banheiro_esta_disponivel }}<br>
+
+                    <label for="id_area_externa_e_vista">Área externa e vista<span style="color: red;">*</span></label>
+                    {{ form.area_externa_e_vista }}<br>
+
+                    <label for="id_banheiro_privativo">Banheiro privativo<span style="color: red;">*</span></label>
+                    {{ form.banheiro_privativo }}<br>
+                    
+                    <label for="id_comidas_e_bebidas">Comidas e bebidas<span style="color: red;">*</span></label>
+                    {{ form.comidas_e_bebidas }}<br>
+
+                    <label for="id_comodidades_gerais">Comodidades Gerais<span style="color: red;">*</span></label>
+                    {{ form.comodidades_gerais }}<br>
+
+                    <label for="id_permitido_fumar">Permitido fumar<span style="color: red;">*</span></label>
+                    {{ form.permitido_fumar }}<br>
+
+                    <label for="id_valor_da_diaria">Valor da Diária<span style="color: red;">*</span></label>
+                    {{ form.valor_da_diaria }}<br>
+                    <div style="display: none;">
+                    {% if hotel %}
+                    <label for="id_propriedade_hotel">Hotel<span style="color: red;">*</span></label>
+                    <input name="propriedade_hotel" value="{{ hotel }}">
+                    {% endif %}
+                    {% if pousada %}
+                    <label for="id_propriedade_pousada">Pousada<span style="color: red;">*</span></label>
+                    <input name="propriedade_pousada" value="{{pousada }}">
+                    {% endif %}
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Confirmar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if form.propriedade_hotel.errors %}
+<ul class="errorlist">
+    {% for error in form.propriedade_hotel.errors %}
+        <li>{{ error }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+</form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script> $(document).ready(function(){ $('#consulta-cep').click(function(){ var cep = $('#id_codigo_postal').val().replace(/[^0-9]/g, ''); if (cep.length == 8) { $.ajax({ url: 'https://viacep.com.br/ws/' + cep + '/json/', dataType: 'json', success: function(data) { $('#id_nome_da_rua').val(data.logradouro); $('#id_complemento').val(data.complemento); $('#id_bairro').val(data.bairro); $('#id_cidade').val(data.localidade); $('#id_estado').val(data.uf); } }); } else { alert('CEP inválido'); } }); }); $(document).ready(function(){ $('#id_nome_da_rua, #id_complemento, #id_cidade, #id_estado').on('input', function() { this.value[0] = this.value.toUpperCase(); }); $('#id_pais_regiao').on('change', function() { this.value = this.value.toUpperCase(); }); }); </script>
+<script>
+    function handleCEP(event) {
+        let input = event.target;
+        let value = input.value.replace(/\D/g, ''); // Remove todos os não-dígitos
+        let formattedValue = '';
+
+        if (value.length >= 5) {
+            formattedValue = `${value.slice(0, 5)}-${value.slice(5)}`;
+        } else {
+            formattedValue = value;
+        }
+
+        input.value = formattedValue;
+    }
+</script>
+<script>
+    function handlePhone(event) {
+      let input = event.target;
+      let value = input.value.replace(/\D/g, ''); // Remove todos os não-dígitos
+      let formattedValue = '';
+    
+      if (value.length >= 11) {
+        formattedValue = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7, 11)}`;
+      } else if (value.length >= 7) {
+        formattedValue = `(${value.slice(0, 2)}) ${value.slice(2, 6)}-${value.slice(6)}`;
+      } else if (value.length >= 2) {
+        formattedValue = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+      } else {
+        formattedValue = value;
+      }
+    
+      input.value = formattedValue;
+    }
+</script>
+<script>
+    function previewImage(input) {
+        const preview = document.getElementById('preview');
+        preview.innerHTML = '';
+
+        for (let i = 1; i <= 10; i++) {
+            const fileInput = document.getElementById(`foto${i}`);
+            const files = fileInput.files;
+
+            for (const file of files) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.classList.add('preview-image');
+                    preview.appendChild(img);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+    }
+</script>
+<script>
+    document.getElementById("confirm").addEventListener("submit", function(event) {
+        // Exibe o container de confirmação
+        document.getElementById("confirmacao").style.display = "block";
+    });
+</script>
+{% endblock %}

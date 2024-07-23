@@ -1,0 +1,346 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load static %}
+<head>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href={% static "css/carousel.css" %}>
+	<link rel="stylesheet" href={% static "css/destinos.css" %}>
+	<script src={% static "js/modernizr-2.6.2.min.js" %}></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+	<style>
+		h4 {
+			font-size: 155%;
+		}
+
+		.animate-box .col-md-6 {
+		color: black !important;
+		}
+
+
+	  </style>
+	  
+	
+</head>
+
+<div id="fh5co-tours" class="fh5co-section-gray">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+				<h4>Lugares para se hospedar em: {{ localidade.localizacao }}</h4>
+				
+			</div>
+		</div>
+		<div class="row row-bottom-padded-md">
+			<div class="property-listing">
+				
+				{% for propriedade in propriedades %}
+					<div class="property-card">
+						<div class="property-content">
+					{% if propriedade.tipo_propriedade == 'apartamento' %}
+						{% with fotos=fotos_por_propriedade.apartamento %}
+							{% if fotos.exists and propriedade.id in prop_apartamento %}
+								{% for foto in fotos %}
+								{% if foto.propriedade_apartamento.id == propriedade.id %}
+									<div class="property-image">
+										<img src="{{ foto.foto1.url }}" alt="">
+									</div>
+								{% endif %}
+								{% endfor %}
+								{% else %}
+									<p>Não há fotos</p>
+								{% endif %}
+							{% endwith %}
+						{% endif %}
+					{% if propriedade.tipo_propriedade == 'casa' %}
+						{% with fotos=fotos_por_propriedade.casa_toda %}
+							{% if fotos.exists and propriedade.id in prop_casa_toda %}
+							{% for foto in fotos %}
+								{% if foto.propriedade_casa_toda.id == propriedade.id %}
+								<div class="property-image">
+									<img src="{{ foto.foto1.url }}" alt="">
+								</div>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							<p>Não há fotos</p>
+						{% endif %}
+					{% endwith %}
+				{% endif %}
+				{% if propriedade.tipo_propriedade == 'quarto' %}
+					{% with fotos=fotos_por_propriedade.casa_quarto %}
+						{% if fotos.exists and propriedade.id in prop_casa_quarto %}
+							{% for foto in fotos %}
+								{% if foto.propriedade_casa_quarto.id == propriedade.id %}
+								<div class="property-image">
+									<img src="{{ foto.foto1.url }}" alt="">
+								</div>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							<p>Não há fotos</p>
+						{% endif %}
+					{% endwith %}
+				{% endif %}
+				{% if propriedade.tipo_propriedade == 'hotel' or propriedade.tipo_propriedade == 'pousada' %}
+					{% with fotos=fotos_por_propriedade.hotel %}
+						{% if fotos.exists and propriedade.id in prop_hotel %}
+							{% for foto in fotos %}
+								{% if foto.propriedade_hotel.id == propriedade.id %}
+							<div class="property-image">
+								<img src="{{ foto.foto1.url }}" alt="">
+							</div>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							<p>Não há fotos</p>
+						{% endif %}
+					{% endwith %}
+				{% endif %}
+								<div class="property-details">
+								<h3>{{ propriedade.nome_da_propriedade }}</h3>
+								<span>Quartos a partir de:</span>
+								<span class="price">R$ {{ propriedade.min_price }}</span>
+								{% if not user.is_authenticated %}
+								<a class="btn btn-primary btn-outline" href="{% url 'login' %}">Reserve <i style="margin-left: -5px;" class="icon-arrow-right22"></i></a>
+								{% else %}
+								<a class="btn btn-primary btn-outline" href="{% url 'reserva' tipo_propriedade=propriedade.tipo_propriedade id_propriedade=propriedade.id %}?checkin={{ request.GET.checkin }}&checkout={{ request.GET.checkout }}">Reserve <i style="margin-left: -5px;" class="icon-arrow-right22"></i></a>
+								{% endif %}
+							</div>
+							<div class="additional-info" style="display: none;">
+								{% if propriedade.serve_cafe_da_manha == 'Sim' %}
+									<p class="info-item"><i class="fas fa-coffee"></i></p>
+									<br>
+								{% endif %}
+								{% if propriedade.aceita_pets == 'Sim' %}
+									<p class="info-item"><i class="fas fa-paw"></i></p>
+									<br>
+								{% endif %}
+								<p class="info-item"><i class="fas fa-users"></i> 1-{{ propriedade.qtd_hospedes }}</p>
+								<br>
+
+								{% if propriedade.local_de_dormir %}
+									<p class="info-item"><i class="fas fa-bed"></i>{{ propriedade.local_de_dormir }}</p>
+									<br>
+								{% endif %}
+								
+							</div>
+						</div>
+							
+						
+						<br>
+					</div>
+				{% endfor %}
+				
+			</div>
+		</div>
+		
+		
+		
+			
+			
+		<div class="row">
+			<h4>Parceiros nessa região!</h4>
+			<div class="carousel">
+				{% for parceiro in parceiros %}
+					<div class="col-md-4 col-sm-6 fh5co-tours carousel-item">
+						<div class="carousel-inner" href="{{ parceiro.url }}">
+							<img src="{{ parceiro.logo.url }}" alt="{{ parceiro.nome }}" class="img-responsive">
+							<div class="desc">
+								<span></span>
+								<h3>{{ parceiro.nome }}</h3>
+								<span>{{ parceiro.descricao }}</span>
+								<a class="btn btn-primary btn-outline" href="{{ parceiro.url }}" target="_blank">Visite agora! <i class="icon-arrow-right22"></i></a>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+				
+			</div>
+			
+
+			<div class="col-md-12 animate-box">
+				<h2 class="heading-title">Guia Completo para Reservar o Hotel Perfeito em Suas Viagens</h2>
+			</div>
+			<div class="col-md-6 animate-box">
+				<p>Seja você um viajante experiente ou esteja planejando sua primeira aventura, encontrar o hotel ideal é essencial para uma experiência memorável. Neste guia abrangente, compartilhamos dicas valiosas para garantir que cada estadia seja confortável, conveniente e repleta de momentos incríveis.</p>
+				<p>Descubra como escolher a localização perfeita, avaliar comodidades, comparar preços e muito mais. Do luxo tranquilo à aconchegante hospedagem boutique, exploraremos diversas opções para atender a todos os gostos e orçamentos. Leia adiante para tornar suas próximas viagens ainda mais extraordinárias!</p>
+				<a href="#">Saiba Mais <i class="icon-arrow-right22"></i></a>
+			</div>
+			
+			<div class="col-md-6 animate-box">
+				<img class="img-responsive" src="images/cover_bg_2.jpg" alt="travel">
+			</div>
+		</div>
+	</div>
+</div>
+<script src={% static "js/bootstrap.min.js" %}></script>
+<script src={% static "js/jquery.min.js" %}></script>
+<script src={% static "js/jquery.easing.1.3.js" %}></script>
+	<!-- main.js -->
+	<script>
+		;(function () {
+	
+	'use strict';
+
+
+
+	// iPad and iPod detection	
+	var isiPad = function(){
+		return (navigator.platform.indexOf("iPad") != -1);
+	};
+
+	var isiPhone = function(){
+	    return (
+			(navigator.platform.indexOf("iPhone") != -1) || 
+			(navigator.platform.indexOf("iPod") != -1)
+	    );
+	};
+
+	// Main Menu Superfish
+	var mainMenu = function() {
+
+		$('#fh5co-primary-menu').superfish({
+			delay: 0,
+			animation: {
+				opacity: 'show'
+			},
+			speed: 'fast',
+			cssArrows: true,
+			disableHI: true
+		});
+
+	};
+
+	//Date Picker
+
+	$(document).ready(function() {
+        $.datepicker.regional['pt-BR'] = {
+            closeText: 'Fechar',
+            prevText: '&#x3C;Anterior',
+            nextText: 'Próximo&#x3E;',
+            currentText: 'Hoje',
+            monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho',
+            'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+            monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun',
+            'Jul','Ago','Set','Out','Nov','Dez'],
+            dayNames: ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'],
+            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+            dayNamesMin: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 0,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional['pt-BR']);
+
+        $('#date-start, #date-end').datepicker({
+            dateFormat: 'dd/mm/yy', // Formato da data
+            firstDay: 0, // Define o primeiro dia da semana como domingo
+            isRTL: false // Define o layout da esquerda para a direita
+        });
+    });
+   [].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {  
+      new SelectFx(el);
+   } );
+
+	// Parallax
+	var parallax = function() {
+		if ( !isiPad() || !isiPhone() ) {
+			$(window).stellar();
+		}
+	};
+
+
+	// Offcanvas and cloning of the main menu
+	var offcanvas = function() {
+
+		var $clone = $('#fh5co-menu-wrap').clone();
+		$clone.attr({
+			'id' : 'offcanvas-menu'
+		});
+		$clone.find('> ul').attr({
+			'class' : '',
+			'id' : ''
+		});
+
+		$('#fh5co-page').prepend($clone);
+
+
+
+	}
+
+	
+
+	// Click outside of the Mobile Menu
+	var mobileMenuOutsideClick = function() {
+		$(document).click(function (e) {
+	    var container = $("#offcanvas-menu, .js-fh5co-nav-toggle");
+	    if (!container.is(e.target) && container.has(e.target).length === 0) {
+	      if ( $('body').hasClass('fh5co-offcanvas') ) {
+				$('body').removeClass('fh5co-offcanvas');
+			}
+	    }
+		});
+	};
+
+
+	// Animations
+
+	var contentWayPoint = function() {
+		var i = 0;
+		$('.animate-box').waypoint( function( direction ) {
+
+			if( direction === 'down' && !$(this.element).hasClass('animated') ) {
+				
+				i++;
+
+				$(this.element).addClass('item-animate');
+				setTimeout(function(){
+
+					$('body .animate-box.item-animate').each(function(k){
+						var el = $(this);
+						setTimeout( function () {
+							el.addClass('fadeInUp animated');
+							el.removeClass('item-animate');
+						},  k * 50, 'easeInOutExpo' );
+					});
+					
+				}, 100);
+				
+			}
+
+		} , { offset: '85%' } );
+	};
+	
+	var stickyBanner = function() {
+		var $stickyElement = $('.sticky-banner');
+		var sticky;
+		if ($stickyElement.length) {
+		  sticky = new Waypoint.Sticky({
+		      element: $stickyElement[0],
+		      offset: 0
+		  })
+		}
+	}; 
+
+	// Document on load.
+	$(function(){
+		mainMenu();
+		parallax();
+		offcanvas();
+		mobileMenuOutsideClick();
+		contentWayPoint();
+		stickyBanner();
+	});
+
+
+}());
+	</script>
+
+
+{% endblock  %}

@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-qOH6FYhqZP3PJw6C5VREejN1kbC/iJnf/d7dKT8HI1UjiomLxNk2Zp7hWlxEp1a/PScM0RM5ZJCtUcn+oG0iDA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel="stylesheet" href='{% static "css/blog.css" %}'>
+{% if messages %}
+<div id="alert-container" class="alert alert-success">
+    {% for message in messages %}
+        <strong>{{ message }}</strong>
+    {% endfor %}
+</div>
+
+<script>
+    // Aguarde 3 segundos e, em seguida, remova o alerta
+    setTimeout(function() {
+        var alertContainer = document.getElementById('alert-container'); 
+        if (alertContainer) {
+            alertContainer.classList.add('fade-out');
+            setTimeout(function() {
+                alertContainer.remove();
+            }, 1000);  // Tempo da transição de fade-out (em milissegundos)
+        }
+    }, 3000);  // 3000 milissegundos = 3 segundos
+</script>
+{% endif %}
+<p></p>
+<h1>Blog Hospeda</h1>
+{% if request.user.is_superuser %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="input-container">
+        {{ form.imagem }}
+        <div id="preview"></div> 
+    </div>
+    <div class="input-container">
+        {{ form.titulo }}
+        <span class="char-count-titulo">128/128</span>            
+    </div>
+    <div class="input-container">
+        {{ form.conteudo }}
+        <span class="char-count">1024/1024</span>            
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-outline btn-lg">Publicar</button>
+</form>
+    {% endif %}
+
+<section class="postagens">
+    {% for post in posts %}
+        <div class="post">
+            <div class="post-header">
+                <a href="{% url 'post' post.pk %}"><h2>{{ post.titulo }}</h2></a>
+                {% if request.user.is_superuser %}
+                <div class="post-options">
+                    <!-- Adicione aqui os botões de atualizar e apagar -->
+                    <a href="{% url 'atualizar_post' post.pk %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                        <form id="deletePostForm" method="post" action="{% url 'excluir_post' post.pk %}">
+                            {% csrf_token %}
+                            <button type="button" class="btn btn-danger" id="openModalQuartoBtn" data-toggle="modal" data-target="#confirmarExclusaoQuartoModal{{ post.pk }}"><i class="fas fa-trash"></i></button>
+                            <div class="modal fade" id="confirmarExclusaoQuartoModal{{ post.pk }}" tabindex="-1" role="dialog" aria-labelledby="confirmarExclusaoQuartoModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="confirmarExclusaoQuartoModalLabel">Confirmar Exclusão</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Tem certeza de que deseja excluir o post {{ post.titulo }}?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-danger" id="confirmarExclusaoPropriedadeBtn">Confirmar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                </div>
+                {% endif %}
+            </div>
+            {% if post.imagem %}
+                <img src="{{ post.imagem.url }}" alt="{{ post.titulo }}">
+            {% endif %}
+            <p>{{ post.conteudo }}</p>
+            <p>Data de Publicação: {{ post.data_publicacao }}</p>
+        </div>
+    {% endfor %}
+</section>
+<script>
+    function previewImage(input) {
+        const preview = document.getElementById('preview');
+        preview.innerHTML = '';
+
+        const fileInput = document.getElementById('id_imagem');
+        const files = fileInput.files;
+
+        for (const file of files) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.classList.add('preview-image');
+                preview.appendChild(img);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+
+    <script>
+        document.querySelector('.conteudo').addEventListener('input', function() {
+            if (this.value.length > 1024) {
+                this.value = this.value.substring(0, 1024);
+            }
+        });
+        document.querySelector('.conteudo').addEventListener('input', function() {
+            const maxLength = 1024;
+            const currentLength = this.value.length;
+            const remaining = maxLength - currentLength;
+    
+            const charCountElement = document.querySelector('.char-count');
+            charCountElement.textContent = remaining + '/1024';
+        });
+    </script>
+        <script>
+            document.querySelector('.titulo').addEventListener('input', function() {
+                if (this.value.length > 128) {
+                    this.value = this.value.substring(0, 128);
+                }
+            });
+            document.querySelector('.titulo').addEventListener('input', function() {
+                const maxLength = 128;
+                const currentLength = this.value.length;
+                const remaining = maxLength - currentLength;
+        
+                const charCountElement = document.querySelector('.char-count-titulo');
+                charCountElement.textContent = remaining + '/128';
+            });
+        </script>
+{% endblock %}

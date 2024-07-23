@@ -1,0 +1,249 @@
+@font-face {
+    font-family: 'icomoon';
+    src: url("../fonts/icomoon/icomoon.95440829a854.eot?srf3rx");
+    src: url("../fonts/icomoon/icomoon.95440829a854.eot?srf3rx#iefix") format("embedded-opentype"), url("../fonts/icomoon/icomoon.9b9208b59529.ttf?srf3rx") format("truetype"), url("../fonts/icomoon/icomoon.d06d2a075295.woff?srf3rx") format("woff"), url("../fonts/icomoon/icomoon.244aaab06822.svg?srf3rx#icomoon") format("svg");
+    font-style: normal;
+  }
+
+
+  ::-webkit-input-placeholder {
+    color: #ed8629; /* Para navegadores baseados no motor WebKit (Chrome, Safari, etc.) */
+ }
+ 
+ :-moz-placeholder {
+    color: #ed8629; /* Para navegadores baseados no motor Gecko (Firefox) */
+    opacity: 1; /* Correção para Firefox */
+ }
+ 
+ ::-moz-placeholder {
+    color: #ed8629; /* Para navegadores baseados no motor Gecko (Firefox) */
+    opacity: 1; /* Correção para Firefox */
+ }
+ 
+ :-ms-input-placeholder {
+    color: #ed8629; /* Para navegadores baseados no motor Trident (Internet Explorer) */
+ }
+
+
+.col-md-6 {
+    justify-content: center;
+    display: grid;
+}
+
+
+h1 {
+    display: grid;
+    color: orange;
+    font-weight: 100;
+    font-size: 23px;
+    height: min-content;
+    border: 0;
+    margin: 0;
+}
+
+
+.button-submit {
+    color: rgb(255, 255, 255);
+    align-self: center;
+    background-color: #ff7700;
+    border-radius: 35px;
+    border: 25px;
+    padding: 5px 20px; /* Altere os valores de padding conforme necessário */
+    font-size: 14px; /* Altere o tamanho da fonte conforme necessário */
+    width: 25%;
+    display: grid;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.button-submit.clicked {
+    /* Defina o estilo que deseja que o botão tenha quando clicado */
+    /* Por exemplo, mudar a escala para dar um efeito de "pressionar" */
+    transform: scale(0.95);
+}
+
+body {
+    margin: 100px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.mensagem-input {
+    width: 100%;
+    padding: 5px;
+    background-color: #ffc99d;
+    border: 0;
+    border-radius: 5px;
+    font-size: normal;
+    resize: none; /* Evita o redimensionamento da caixa de texto */
+    max-width: 100%; /* Garante que a caixa de texto não ultrapasse a largura do contêiner */
+    max-height: 200px; /* Define uma altura máxima para a caixa de texto */
+    line-break: auto;
+    word-wrap: break-word;
+}
+
+.mensagem-input::after {
+        content: "\n";
+        white-space: pre;
+
+}
+
+.char-count {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+
+.nome-sobrenome {
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+    border-radius: 5px;
+    width: 100%;
+    border: 0;
+    
+}
+
+.email-telefone {
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+    border: 0;
+    border-radius: 5px;
+    width: 100%;
+
+}
+
+
+.endereço {
+    justify-content: center;
+    padding: 5px;
+    background-color: #ffdec3;
+    border-radius: 5px;
+    border: 0;
+    width: 100%;
+}
+
+
+
+.nome {
+    background-color: #fff1e8;
+    border-radius: 5px;
+    border: 0;
+    width: 100%;
+    margin-right: 5px;
+    padding: 5px;
+
+}
+
+.sobrenome {
+    background-color: #fff1e8;
+    border-radius: 5px;
+    border: 0;
+    width: 100%;
+
+}
+
+.e-mail {
+    padding: 5px;
+    background-color: #ffebdc;
+    border: 0;
+    border-radius: 5px;
+    width: 100%;
+    margin-right: 5px;
+
+}
+
+.end-msg {
+    display: grid;
+    border: 0;
+    margin-bottom: 5px;
+}
+
+.telefone {
+    padding: 5px;
+    background-color: #ffebdc;
+    border: 0;
+    border-radius: 5px;
+    width: 100%;
+
+}
+
+.checkin-checkout {
+    display: flex;
+    flex-direction: column; /* Agora os campos estarão em linha */
+    justify-content: center; /* Centraliza os campos horizontalmente */
+    margin-bottom: 5px; /* Adiciona um espaçamento entre os campos */
+    float: right; /* Faz com que os campos de check-in e check-out fiquem à esquerda */
+    margin-right: -20px;
+}
+
+.dates-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.checkin,
+.checkout {
+    display: block;
+}
+
+
+.checkin {
+    display: flex;
+    background-color: #fff1e8;
+    border: 0;
+    border-radius: 5px;
+    width: 40%; /* Reduzi a largura para 40% */
+    margin-left: 25px; /* Adicionei um espaçamento entre os campos */
+}
+
+.checkout {
+    display: flex;
+    background-color: #fff1e8;
+    border: 0;
+    border-radius: 5px;
+    width: 40%; /* Reduzi a largura para 40% */
+    margin-left: 10px; /* Adicionei um espaçamento entre os campos */
+}
+
+.nome-sobrenome,
+.email-telefone,
+.endereço,
+.mensagem-input,
+.checkin-checkout {
+    margin-bottom: 10px; /* Adiciona um espaçamento de 10px entre os campos */
+}
+
+.colar {
+    display: flex;
+    align-items: center;
+    background-color: #fff1e8;
+    border-radius: 5px;
+    border: 0;
+    padding-left: 0px;
+    margin-bottom: 225px;
+    margin-right: 0px; /* Adiciona um espaçamento entre os campos */
+}
+
+.label-c {
+    color: #ed8629;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.left {
+    left: 0%;
+}
+
+.right {
+    right: 22%;
+}
+
+.checkin::placeholder,
+.checkout::placeholder {
+    text-align: center;
+}

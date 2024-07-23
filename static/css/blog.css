@@ -1,0 +1,144 @@
+h1 {
+    text-align: center;
+}
+h4{
+    margin: 10px;
+}
+form {
+    margin-top: 20px;
+    max-width: 40%;
+    margin: auto;
+}
+
+footer{
+    width: 100%;
+    bottom: 0;
+}
+
+
+form input,
+form textarea,
+form button {
+    margin-bottom: 25px;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #F78536;
+}
+.input-container {
+    position: relative;   
+}
+.char-count,
+.char-count-titulo {
+    position: absolute;
+    bottom: 0;
+    right: 0;   
+}
+
+.postagens {
+    padding: 20px;
+    height: 100vh;
+}
+
+.post {
+    border: 1px solid #F78536; /* Cinza claro para separar as postagens */
+    padding: 15px;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.post img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+/* Adicione no final do seu arquivo styles.css */
+
+/* Adicione no final do seu arquivo styles.css */
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-warning, .btn-danger{
+    height: 50px;
+    width: 50px;
+    
+}
+.btn-warning{
+    margin-top: 7px;
+}
+
+.fa-edit{
+    margin-top: 5px;
+}
+
+.post-options {
+    display: flex;
+    gap: 10px;
+}
+        #preview {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .preview-image {
+            min-height: 300px;
+            max-height: 300px;
+            margin: 5px;
+        }
+        .post-header h2 {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* Número de linhas que você deseja exibir */
+            -webkit-box-orient: vertical;
+        }
+        p {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+        }
+        
+
+@media screen and (max-width: 768px) {
+    form {
+        margin-top: 20px;
+        max-width: 90%;
+        margin: auto;
+    }
+    
+    form input,
+    form textarea,
+    form button {
+        margin-bottom: 25px;
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    
+    .postagens {
+        padding: 20px;
+    }
+    
+    .post {
+        padding: 15px;
+        width: 95%;
+        margin: auto;
+    }
+    
+    .post img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+}

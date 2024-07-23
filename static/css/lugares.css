@@ -1,0 +1,82 @@
+/* Adicione este trecho ao seu arquivo de estilos CSS */
+
+body {
+    font-family: 'Arial', sans-serif; /* Escolha uma fonte apropriada */
+    margin: 0;
+    padding: 0;
+    
+}
+footer{
+    
+    bottom: 0;
+    width: 100%;
+}
+
+.container-lugares {
+    background-color: #fff7ea; /* Cor de fundo levemente cinza */
+    padding: 20px;
+   
+    margin: 0px auto; /* Centralizar a container */
+    max-width: 800px; /* Limitar a largura para melhor leitura */
+    
+}
+
+
+.search-form {
+    margin-bottom: 20px;
+}
+
+.search-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: #555; /* Cor do texto mais escura para rótulos */
+}
+
+.search-form input,
+.search-form button {
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+}
+
+.search-form input {
+    width: 70%;
+}
+
+.btn-orange {
+    background-color: #F78536; /* Cor de fundo laranja para o botão */
+    color: white; /* Cor do texto branco para o botão */
+    padding: 10px 20px; /* Ajuste conforme necessário */
+    text-decoration: none; /* Remover sublinhado do link */
+    border-radius: 5px; /* Cantos arredondados */
+    display: inline-block;
+    margin-top: 10px;
+    transition: background-color 0.3s ease; /* Adicionar transição suave de cor */
+}
+
+
+
+.localidades-list {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+}
+
+.localidade-card {
+    background-color: white; /* Cor de fundo branco */
+    border: 1px solid #F78536; /* Borda laranja */
+    border-radius: 10px; /* Cantos arredondados */
+    padding: 15px;
+    margin: 10px;
+    width: calc(33.33% - 20px); /* Três localidades por linha com margens */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+@media (max-width: 600px) {
+    .localidade-card {
+        width: calc(100% - 20px); /* Uma localidade por linha em telas pequenas */
+    }
+}
+
+

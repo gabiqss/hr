@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/lugares.css' %}">
+    <style>
+     .localidade-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Alinha os itens no centro horizontalmente */
+            text-align: center; /* Centraliza o texto */
+        }
+
+        .btn-orange {
+            margin-top: auto; /* Empurra o botão para a parte inferior do contêiner */
+        }
+        .localidade-card p, .localidade-card h2 {
+            margin: 0;
+        }
+      
+      
+        .localidade-card img {
+            width: 200px; 
+            height: 200px;
+        }
+
+        
+        
+    </style>
+    <div class="container-lugares">
+        <h1>Confira nossas indicações!</h1>
+
+        <!-- Formulário de Pesquisa -->
+        <form method="get" action="{% url 'indicacoes' %}" class="search-form">
+            <!-- <label for="search_input">Pesquisar:</label><br> -->
+            <input type="text" id="search_input" name="q" placeholder="Pesquise por uma cidade, categoria ou estabelecimento">
+            <button type="submit" class="btn-orange">Pesquisar</button>
+        </form>
+
+        <!-- Lista de parceiros -->
+        {% if parceiros %}
+            <div class="localidades-list">
+                {% for parceiro in parceiros %}
+                    <div class="localidade-card">
+                        <img src="{{ parceiro.logo.url }}" class="img-responsive" alt="">
+                        <h2>{{ parceiro.nome }}</h2>
+                        <p>{{ parceiro.descricao }}</p>
+                        <p>{{ parceiro.cidade }}</p>
+                        <a href="{{ parceiro.url }}" target="_blank" class="btn-orange">Visite agora!</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Nenhum parceiro encontrado. Tente outra pesquisa.</p>
+        {% endif %}
+    </div>
+{% endblock %}

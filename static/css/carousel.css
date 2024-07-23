@@ -1,0 +1,132 @@
+.carousel-container {
+    position: relative;
+    overflow: hidden; /* Adiciona barra de rolagem horizontal quando o conteúdo ultrapassa a largura */
+    z-index: 0;
+  }
+  
+  .carousel {
+    position: relative;
+    display: flex;
+    transition: transform 0.3s ease;
+    overflow-x: hidden;
+    width: 100%;
+    min-height: 300px;
+    max-height: 300px;
+    padding: 5px;
+    
+  }
+  
+  .carousel-wrapper {
+    display: flex;
+}
+@media screen and (max-width: 768px) {
+  .carousel {
+    overflow-x: scroll;
+  }
+}
+
+.desc {
+  top: 20%;
+  padding: 30px;
+}
+
+  .carousel-item {
+    flex: 0 0  33.3333333333%;
+    max-width:  33.3333333333%;
+    box-sizing: border-box;
+    min-height: 300px;
+    max-height: 300px;
+  }
+  
+  .carousel-inner {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .carousel img {
+    width: 100%;
+    height: 250px; /* Corrija a altura para manter a proporção */
+    overflow-y: hidden;
+  }
+  
+  .carousel .fh5co-tours {
+    flex: 0 0 33.3333333333%; /* Define a largura de cada item para ocupar 1/3 do espaço disponível */
+    max-width: 33.3333333333%; /* Define a largura máxima de cada item */
+  }
+  
+  .carousel-button {
+    color: #F78536;
+    cursor: pointer;
+    border: 0;
+    font-size: 0;
+    display: grid;
+    justify-content: center;
+    position: absolute;
+    overflow: visible; /* Mantém os botões visíveis mesmo que transbordem do contêiner */
+  }
+  
+  .carousel-button .arrow {
+    font-size: 20px;
+  }
+  
+  
+  .scroll-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .scroll-left,
+  .scroll-right {
+    cursor: pointer;
+    font-size: 2em;
+    margin: 0 10px;
+  }
+  
+  .scroll-content {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+  }
+  
+  @media (max-width: 767px) {
+    .carousel-item,
+    .carousel .fh5co-tours {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 48px;
+  cursor: pointer;
+  color: #000000;
+  z-index: 1000;
+}
+
+.left-btn {
+  left: -5px;
+}
+
+.right-btn {
+  right: -5px;
+}
+
+@media screen and (max-width: 768px) {
+  .carousel-btn {
+    color: #F78536;
+    font-weight: 900;
+    font-size: 56px;
+  }
+  .left-btn {
+    left: 15px;
+  }
+  .right-btn {
+    right: 15px;
+  }
+}
+  

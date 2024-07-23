@@ -1,0 +1,60 @@
+/* Estilos para os botões */
+.button-group {
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff; /* Cor de fundo do botão */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease; /* Transição suave ao passar o mouse */
+}
+
+.button-group {
+    text-align: center; /* Centraliza o conteúdo dentro da div */
+    margin-top: 50px; /* Adiciona um espaçamento no topo para dar um pouco de espaço */
+}
+
+
+
+.btn:hover {
+    background-color: #000000; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilos para os cabeçalhos */
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Estilos gerais para a página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Cor de fundo da página */
+    
+    justify-content: center;
+    align-items: center;
+}
+
+/* Adicione outros estilos conforme necessário */
+.column {
+    width: 45%;
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px;
+    background-color: #ffffff; /* Adicione uma cor de fundo se desejar */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-bottom: 10%;
+    margin-left: 40px;
+    
+}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<style>
+    p {
+        margin-top: -15px;
+        color: black;
+    }
+    h2 {
+        margin-bottom: -10px;
+    }
+</style>
+<div class="container">
+    <div class="col-md-8 col-md-offset-2 text-center fh5co-heading heading-section">
+        <h2>Perfil</h2>
+    </div>
+<div class="row">
+
+<div class="col-md-8 col-md-offset-2">
+    <h3>Nome completo</h3>
+    <p>{{ user.nome }} {{ user.sobrenome }}</p>
+</div>
+<div class="col-md-8 col-md-offset-2">
+    <h3>CPF/CNPJ</h3>
+    <p>{% if user.cpf %} {{ user.cpf }} {% else %} Sem CPF {% endif %} / {% if user.cnpj %} {{ user.cnpj }} {% else %} Sem CNPJ {% endif %}</p>
+</div>
+<div class="col-md-8 col-md-offset-2">
+    <h3>Contato</h3>
+    <p>Telefone: {{ user.telefone }}<br/>E-mail: {{ user.email }}</p>
+</div>
+<div class="col-md-8 col-md-offset-2">
+    <h3>Endereço</h3>
+    <p>{% if user.rua %} {{ user.rua }}{% else %} Rua não informada{% endif %}, {% if user.numero %} {{ user.numero }}{% else %} Número não informado{% endif %}, {% if user.complemento %} {{ user.complemento }} {% else %} Complemento não informado {% endif %}<br/>{% if user.cep %} CEP: {{ user.cep }}{% else %} CEP não informado {% endif %}<br/>Cidade: {{ user.cidade }}<br/>Estado: {{ user.uf }}</p>
+</div>
+<div class="col-md-8 col-md-offset-2">
+    <h3>Esqueceu a senha?</h3>
+    <p><a href="{% url 'reset_password' %}">Redefina sua senha</a></p>
+</div>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,96 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap');
+  .BemVindoHospedaRecife {
+    font-family: 'Inter', sans-serif;
+    font-size: 50px;
+    margin: auto;
+    font-weight: 600;
+    color: #5A5A5A;
+  }
+  .texto1,
+  .texto2,
+  .texto3 {
+    position: relative; /* Altere para posição relativa */
+    width: 75%; /* Garanta que os textos ocupem a largura total */
+    margin: auto;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    text-indent: 30px;
+    color: #5A5A5A;
+  }
+
+  .Rectangle3 {
+    position: relative; /* Altere para posição relativa */
+    height: 185px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .Rectangle4,
+  .Rectangle8,
+  .Rectangle9,
+  .Rectangle10 {
+    position: relative; /* Altere para posição relativa */
+    left: 0; /* Remova o posicionamento absoluto em relação à esquerda */
+    margin-top: 20px; /* Adicione margem superior para espaçamento */
+    margin-right: 20px; /* Adicione margem na direita para espaçamento lateral */
+    border-radius: 3px;
+    object-fit: cover;
+    width: 279px; height: 200px;
+  }
+  @media screen and (max-width: 768px) {
+    .BemVindoHospedaRecife {
+    font-family: 'Inter', sans-serif;
+    font-size: 30px;
+    margin: auto;
+    font-weight: 600;
+    color: #5A5A5A;
+  }  
+  
+  .texto1,
+  .texto2,
+  .texto3 {
+    position: relative; /* Altere para posição relativa */
+    width: 85%; /* Garanta que os textos ocupem a largura total */
+    margin: auto;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    text-indent: 30px;
+    text-align: center;
+  }
+  .Rectangle4,
+  .Rectangle8,
+  .Rectangle9,
+  .Rectangle10 {
+    position: relative; /* Altere para posição relativa */
+    left: 0; /* Remova o posicionamento absoluto em relação à esquerda */
+    margin-top: 20px; /* Adicione margem superior para espaçamento */
+    margin-right: 0px; /* Adicione margem na direita para espaçamento lateral */
+    object-fit: cover;
+    width: 279px; height: 200px;
+  }
+  }
+</style>
+<div class="Frame1">
+  <img class="Rectangle3" src="{% static 'images/e9cf2c03-83db-4c70-8593-8e2ba19b4b64.png' %}" />
+  <div class="spacer" style="height: 30px;"></div>
+  <div class="título" style="text-align: center;">
+  <div class="BemVindoHospedaRecife">Bem vindo à Hospeda Recife!</div> </div><br>
+  <div class="texto1">     Somos uma plataforma criada por recifenses que servirá como a sua porta de entrada para vivenciar o nosso estado como um verdadeiro pernambucano.  Inspirados pela famosa citação de Cícero Dias - "Eu vi o mundo... ele começava no Recife" - a nossa plataforma oferece uma oportunidade única de mergulhar na autenticidade e na riqueza cultural da nossa encantadora cidade e de demais destinos em nosso Pernambuco, como Olinda, Porto de Galinhas, Caruaru, Petrolina, Bonito e muito mais.</div> <br>
+  <div class="texto2">     Na Hospeda Recife, acreditamos que viajar vai além de visitar lugares turísticos. Trata-se de se conectar com as raízes, descobrir segredos locais e criar memórias genuínas. Nossos anfitriões cuidadosamente selecionados são moradores apaixonados pelo nosso estado, prontos para compartilhar seus conhecimentos e proporcionar uma estadia memorável. Com uma ampla variedade de acomodações, incluindo hotéis, pousadas e opções de hospedagens particulares, temos o lugar perfeito para cada viajante. Além disso, oferecemos recomendações exclusivas de restaurantes, eventos culturais e passeios personalizados, garantindo que você vivencie nossa região encantadora como um verdadeiro local.</div> <br>
+  <div class="texto3">Seja você um amante da cultura, um apreciador da gastronomia ou um explorador em busca de aventuras, a Hospeda Recife está aqui para tornar a sua estadia inesquecível. Junte-se a nós e descubra porque Pernambuco é ponto de partida para experiências únicas no mundo inteiro.</div>
+
+  <div class="images" style="text-align: center;">
+  <img class="Rectangle4" style="" src="{% static 'images/9f1c1fbd-4d18-4981-bb99-e8367310b945.png' %}" />
+  <img class="Rectangle8" style="" src="{% static 'images/7e01452c-5d81-4ff4-8045-15c44d345bb9.png' %}" />
+  <img class="Rectangle9" style="" src="{% static 'images/f5bbca98-d4ac-466a-a8bd-b272a9c6ff30.png' %}" />
+  <img class="Rectangle10" style="" src="{% static 'images/fde19610548da1441bcd810d5945d2a7.png' %}" />
+  <div class="spacer" style="height: 30px;"></div>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/login_index.css' %}">
+    <style>
+        header {
+            margin-bottom: .5em;
+            margin-top: 0;
+        }
+        body{
+            background-color:#fff;
+        }
+        h1 {
+            color: #F78536;
+        }
+
+        button {
+            background-color: #F78536;
+        }
+        .column {
+            margin-top: 3em;
+        }
+        @media (max-width: 768px) {
+            .column {
+                margin-top: 3em;
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<div class="justify-content-center">
+<div class="column">
+    <h1>Hóspede</h1>
+    <h1 style="justify-content: center; font-size: xx-large; margin-bottom: -1.0em;"><i class="fas fa-bed"></i></h1>
+    <div class="button-group">
+        <a href="{% url 'register' %}"><button class="btn">Registro</button></a>
+        <a href="{% url 'login' %}"><button class="btn">Login</button></a>
+    </div>
+</div>
+
+<div class="column">
+    <h1>Anfitrião</h1>
+    <h1 style="justify-content: center; font-size: xx-large; margin-bottom: -1.0em;"><i class="fas fa-home"></i></h1>
+    <div class="button-group">
+        <a href="{% url 'register_anfitriao' %}"><button class="btn">Registro</button></a>
+        <a href="{% url 'login_anfitriao' %}"><button class="btn">Login</button></a>
+    </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,550 @@
+@font-face {
+    font-family: 'icomoon';
+    src: url("../fonts/icomoon/icomoon.95440829a854.eot?srf3rx");
+    src: url("../fonts/icomoon/icomoon.95440829a854.eot?srf3rx#iefix") format("embedded-opentype"), url("../fonts/icomoon/icomoon.9b9208b59529.ttf?srf3rx") format("truetype"), url("../fonts/icomoon/icomoon.d06d2a075295.woff?srf3rx") format("woff"), url("../fonts/icomoon/icomoon.244aaab06822.svg?srf3rx#icomoon") format("svg");
+    font-style: normal;
+  }
+
+
+  ::-webkit-input-placeholder {
+    color: #ed8629; /* Para navegadores baseados no motor WebKit (Chrome, Safari, etc.) */
+ }
+ 
+ :-moz-placeholder {
+    color: #ed8629; /* Para navegadores baseados no motor Gecko (Firefox) */
+    opacity: 1; /* Correção para Firefox */
+ }
+ 
+ ::-moz-placeholder {
+    color: #ed8629; /* Para navegadores baseados no motor Gecko (Firefox) */
+    opacity: 1; /* Correção para Firefox */
+ }
+ 
+ :-ms-input-placeholder {
+    color: #ed8629; /* Para navegadores baseados no motor Trident (Internet Explorer) */
+ }
+
+
+.col-md-6 {
+    justify-content: center;
+    display: grid;
+}
+
+
+h1 {
+    display: grid;
+    color: orange;
+    font-weight: 100;
+    font-size: 23px;
+    height: min-content;
+    border: 0;
+    margin: 0;
+}
+
+
+.button-submit {
+    color: rgb(255, 255, 255);
+    align-self: center;
+    background-color: #ff7700;
+    border-radius: 35px;
+    border: 25px;
+    padding: 5px 20px; /* Altere os valores de padding conforme necessário */
+    font-size: 14px; /* Altere o tamanho da fonte conforme necessário */
+    width: 25%;
+    display: grid;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.button-submit.clicked {
+    /* Defina o estilo que deseja que o botão tenha quando clicado */
+    /* Por exemplo, mudar a escala para dar um efeito de "pressionar" */
+    transform: scale(0.95);
+}
+
+body {
+    justify-content: center;
+
+}
+
+.mensagem-input {
+    width: 100%;
+    padding: 5px;
+    background-color: #ffc99d;
+    border: 0;
+    border-radius: 5px;
+    font-size: normal;
+    resize: none; /* Evita o redimensionamento da caixa de texto */
+    max-width: 100%; /* Garante que a caixa de texto não ultrapasse a largura do contêiner */
+    max-height: 200px; /* Define uma altura máxima para a caixa de texto */
+    line-break: auto;
+    word-wrap: break-word;
+}
+
+.mensagem-input::after {
+        content: "\n";
+        white-space: pre;
+
+}
+
+.char-count {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+
+.nome-sobrenome {
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+    border-radius: 5px;
+    width: 100%;
+    border: 0;
+    
+}
+
+.email-telefone {
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+    border: 0;
+    border-radius: 5px;
+    width: 100%;
+
+}
+
+
+.endereço {
+    justify-content: center;
+    padding: 5px;
+    background-color: #ffdec3;
+    border-radius: 5px;
+    border: 0;
+    width: 100%;
+}
+
+
+
+.nome {
+    background-color: #fff1e8;
+    border-radius: 5px;
+    border: 0;
+    width: 100%;
+    margin-right: 5px;
+    padding: 5px;
+
+}
+
+.sobrenome {
+    background-color: #fff1e8;
+    border-radius: 5px;
+    border: 0;
+    width: 100%;
+
+}
+
+.e-mail {
+    padding: 5px;
+    background-color: #ffebdc;
+    border: 0;
+    border-radius: 5px;
+    width: 100%;
+    margin-right: 5px;
+
+}
+
+.end-msg {
+    display: grid;
+    border: 0;
+    margin-bottom: 5px;
+}
+
+.telefone {
+    padding: 5px;
+    background-color: #ffebdc;
+    border: 0;
+    border-radius: 5px;
+    width: 100%;
+
+}
+
+.checkin-checkout {
+    display: flex;
+    flex-direction: column; /* Agora os campos estarão em linha */
+    justify-content: center; /* Centraliza os campos horizontalmente */
+    margin-bottom: 5px; /* Adiciona um espaçamento entre os campos */
+    float: right; /* Faz com que os campos de check-in e check-out fiquem à esquerda */
+    margin-right: -20px;
+}
+
+.dates-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.checkin,
+.checkout {
+    display: block;
+}
+
+.qty-pessoa {
+    display: flex;
+    background-color: #fff1e8;
+    border: 0;
+    border-radius: 5px;
+    width: 40%; /* Reduzi a largura para 40% */
+    margin-left: 25px; /* Adicionei um espaçamento entre os campos */
+}
+
+.checkin {
+    display: flex;
+    background-color: #fff1e8;
+    border: 0;
+    border-radius: 5px;
+    width: 50%; /* Reduzi a largura para 40% */
+    margin-left: 25px; /* Adicionei um espaçamento entre os campos */
+}
+
+.checkout {
+    display: flex;
+    background-color: #fff1e8;
+    border: 0;
+    border-radius: 5px;
+    width: 50%; /* Reduzi a largura para 40% */
+    margin-left: 10px; /* Adicionei um espaçamento entre os campos */
+}
+
+.nome-sobrenome,
+.email-telefone,
+.endereço,
+.mensagem-input,
+.checkin-checkout {
+    margin-bottom: 10px; /* Adiciona um espaçamento de 10px entre os campos */
+}
+
+.colar {
+    display: flex;
+    align-items: center;
+    background-color: #fff1e8;
+    border-radius: 5px;
+    border: 0;
+    padding-left: 0px;
+    margin-bottom: 10px;
+    margin-right: 0px; /* Adiciona um espaçamento entre os campos */
+}
+
+.label-c {
+    color: #ed8629;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.left {
+    left: 12.5%;
+}
+
+.right {
+    right: 9%;
+}
+
+.checkin::placeholder,
+.checkout::placeholder {
+    text-align: center;
+}
+
+.container-foto {
+    display: flex;
+    justify-content: center;
+    max-height: 10px;
+    block-size: auto;
+    max-width: 100%;
+    padding: 20px;
+    max-height: 100%;
+    min-height: 100%;
+
+}
+.foto {
+    width: 300px; /* Define uma largura específica */
+    height: auto; /* A altura será ajustada automaticamente para manter a proporção */
+    padding: 30px;
+}
+
+.container.text-center.mt-4 {
+    padding-top: -150px;
+}
+/* CALENDARIO PARTES */
+
+#calendario {
+    width: 300px;
+    height: 300px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    overflow: hidden; /* Garante que a borda arredondada é aplicada corretamente */
+    font-family: 'Montserrat', sans-serif;
+    
+}
+/* Esconda os botões 'mês', 'semana' e 'dia' */
+.fc-header-toolbar .fc-month-button{
+    display: none;
+}
+.fc-header-toolbar .fc-week-button{
+    display: none;
+}
+.fc-header-toolbar .fc-day-button {
+    display: none;
+}
+
+
+
+.fc-event {
+    width: 100px;
+}
+
+.fc-day-grid-event, .fc-time-grid-event {
+    font-size: 14px; /* Aumenta o tamanho da fonte para uma aparência mais moderna */
+}
+
+.calendario-container {
+    float: right;
+    margin-top: 10px;
+    right: 20%;
+    margin-left: 70px;
+    margin-bottom: 5%;
+    border-radius: 8px;
+    border: 1px solid #e9ecef; /* Adiciona uma borda fina */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra sutil */
+}
+
+/* Ajuste de Cores */
+.fc-day, .fc-content-skeleton, .fc-highlight, .fc-today {
+    background-color: #ffffff; /* Cor de fundo dos dias no calendário */
+}
+
+/* Fontes */
+.fc-day-grid-event, .fc-time-grid-event {
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+/* Estilos de Botões e Controles */
+.fc-prev-button, .fc-next-button, .fc-today-button {
+    border: none;
+}
+
+.fc-prev-button:hover, .fc-next-button:hover, .fc-today-button:hover {
+    background-color: rgb(255, 140, 0);
+    border-color: rgb(255, 140, 0);
+    border: none;
+}
+
+/* Animações */
+.fc-day-grid-event, .fc-time-grid-event {
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+/* Bordas e Sombras */
+.fc-day, .fc-content-skeleton {
+    border: none; /* Remove a borda padrão */
+    border-bottom: 1px solid #e9ecef; /* Adiciona uma borda inferior fina */
+    box-shadow: none; /* Remove a sombra padrão */
+}
+
+
+
+/* slider */
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600); 
+
+html {
+  border-top: 5px solid #fff;
+  background: #ffffff;
+  color: #2a2a2a;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans';
+}
+
+h1 {
+  color: #fff;
+  text-align: center;
+  font-weight: 300;
+}
+
+#slider {
+  position: relative;
+  overflow: hidden;
+  margin: 0px auto 0 auto;
+  border-radius: 7px;
+}
+
+#slider ul {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  height: 200px;
+  list-style: none;
+}
+
+#slider ul li {
+  position: relative;
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 500px;
+  height: 300px;
+  background: #ccc;
+  text-align: center;
+  }
+
+  .slide-container {
+    background-color: #58DDAF;
+    display: flex;
+    align-items: center; /* Centraliza verticalmente o conteúdo */
+    justify-content: center; /* Centraliza horizontalmente o conteúdo */
+    min-height: 350px; /* Altura mínima da .slide-container */
+    border-radius: 10px;
+    max-width: 550px;
+    size: 75%;
+}
+
+#slider:hover {
+    transform: scale(1.05);
+    transition: .33s;
+
+}
+
+.slide-container {
+    background-color: #58DDAF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 350px; /* Ajuste conforme necessário */
+    border-radius: 10px;
+    max-width: 550px;
+    margin: 0 auto;
+    text-align: center;
+    transform: scale(0.8); /* Reduz em 20% mantendo a proporção */
+    transform-origin: center; /* Define o ponto de origem para o centro */
+  }
+
+/*
+
+@Programith
+
+*/
+
+@import url(https://pro.fontawesome.com/releases/v5.11.2/css/all.css);
+
+
+
+body .options {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    overflow: hidden;
+    min-width: 600px;
+    max-width: 900px;
+    width: calc(100% - 100px);
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adicione a propriedade box-shadow aqui */
+}
+
+
+body .options .option {
+    position: relative;
+    overflow: hidden;
+    min-width: 60px;
+    margin: 10px;
+    background: var(--optionBackground, var(--defaultBackground, #e6e9ed));
+    background-size: auto 120%;
+    background-position: center;
+    cursor: pointer;
+    transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+}
+
+.option:nth-child(1) {
+    --defaultBackground: #ed5565;
+}
+.option:nth-child(2) {
+    --defaultBackground: #fc6e51;
+}
+.option:nth-child(3) {
+    --defaultBackground: #ffce54;
+}
+.option:nth-child(4) {
+    --defaultBackground: #2ecc71;
+}
+.option:nth-child(5) {
+    --defaultBackground: #5d9cec;
+}
+.option:nth-child(6) {
+    --defaultBackground: #ac92ec;
+}
+
+.option.active {
+    flex-grow: 10000;
+    transform: scale(1);
+    max-width: 600px;
+    margin: 0px;
+    border-radius: 40px;
+    background-size: auto 100%;
+}
+
+.option.active .label {
+    bottom: 20px;
+    left: 20px;
+}
+.option.active .label .info > div {
+    left: 0px;
+    opacity: 1;
+}
+.option:not(.active) {
+    flex-grow: 1;
+    border-radius: 30px;
+}
+
+.option:not(.active) .label {
+    bottom: 10px;
+    left: 10px;
+}
+.option:not(.active) .label .info > div {
+    left: 20px;
+    opacity: 0;
+}
+
+.label {
+    display: flex;
+    position: absolute;
+    right: 0px;
+    height: 40px;
+    transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+}
+
+.icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-width: 40px;
+    max-width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-color: white;
+    color: var(--defaultBackground);
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+    color: white;
+    font-weight: bold;
+}

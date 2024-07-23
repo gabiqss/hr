@@ -1,0 +1,134 @@
+.ui-datepicker-calendar .ocupada a {
+    background-color: #ff0000 !important;
+    color: #fff !important;
+}
+
+#calendario {
+    margin-top: -530px;
+    margin-right: -400px;
+    border: none;
+ /* Adicionando margem à direita para mover a div mais para a direita */
+}
+
+.right-calendar {
+    right: -7.5%;
+    padding: 0%;
+    top: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.calendario-container {
+    max-width: 50%; /* Defina a largura máxima desejada, por exemplo, 100% */
+    margin: 0 auto; /* Centralize o calendário na coluna */
+}
+
+.ui-datepicker {
+    right: 0;
+    left: auto;
+}
+/* Estilize o cabeçalho do calendário */
+.fc-toolbar {
+    background-color: #fff1e8;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+}
+
+/* Estilize os botões de navegação */
+.fc-prev-button, .fc-next-button {
+    background-color: #fff1e8;
+    border: none;
+    color: #fff;
+}
+
+/* Remove a margem entre o cabeçalho e o calendário */
+.fc-toolbar {
+    margin-bottom: 0;
+}
+
+/* Estilize os dias da semana no cabeçalho do calendário */
+.fc-head td {
+    background-color: #fff1e8;
+    color: #fff;
+    font-weight: 100;
+    border: none;
+}
+
+/* Estilize os dias no corpo do calendário */
+.fc-day {
+    background-color: #fff1e8; /* Cor de fundo dos dias */
+    border: 0;
+    padding: 10px;
+    height: 100px; /* Altura dos dias */
+}
+
+/* Estilize os eventos no calendário */
+.fc-event {
+    background-color: #fff1e8;
+    border: none;
+    color: #fff;
+}
+
+/* Estilize o texto dos eventos */
+.fc-event-title {
+    font-weight: 100;
+}
+
+/* Estilize a borda do calendário */
+.fc-view {
+    border: none;
+}
+
+/* Estilize as bordas das células */
+.fc-widget-content {
+    border: none;
+}
+
+/* Modificando a cor de fundo dos botões de visualização */
+.fc-button-group .fc-button {
+    background: none;
+    color: #ed7f23;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 5px 10px;
+}
+
+/* Adicionando margem aos botões de visualização */
+.fc-button-group .fc-button {
+    margin-right: 10px; /* Ajuste conforme necessário */
+}
+
+/* Modificando a cor de fundo dos botões de navegação */
+
+
+/* Adicionando margem aos botões de navegação */
+.fc-prev-button {
+    margin-right: 10px; /* Ajuste conforme necessário */
+    border: 0;
+}
+
+.fc-next-button {
+    margin-left: 10px; /* Ajuste conforme necessário */
+}
+
+/* Esconda os botões "Today", "Month", "Week" e "Day" */
+.fc-today-button, .fc-month-button, .fc-agendaWeek-button, .fc-agendaDay-button {
+    display: none;
+}
+
+/* Defina o fundo do calendário com a cor #ffefe7 */
+.fc-view-container {
+    background-color: #ffefe7;
+}
+
+
+
+/* SÓ O CHECKIN E CHECKOUT */
+
+
+#calendario {
+    background-color: #ffefe7;
+    border: 0;
+}
